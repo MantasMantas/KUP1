@@ -1,0 +1,60 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "Experimentor",
+            "id": "67659982-d3c7-43d3-9b06-d51205cbab74",
+            "actions": [],
+            "bindings": []
+        },
+        {
+            "name": "Participant",
+            "id": "bda3fcd7-a536-4343-a3f5-a4506f807ac2",
+            "actions": [
+                {
+                    "name": "Thumbstick",
+                    "type": "PassThrough",
+                    "id": "0b33acaa-9d1d-4666-a2e7-b2063c345c6d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Trigger",
+                    "type": "Button",
+                    "id": "28d8077c-3de3-4673-abdd-812d695cfde6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "281278e3-6b6a-46c2-a3d4-d8eba60cc708",
+                    "path": "<OculusTouchController>{LeftHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc1383c4-ea2d-433f-9c79-68dceeab7e06",
+                    "path": "<OculusTouchController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Trigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
