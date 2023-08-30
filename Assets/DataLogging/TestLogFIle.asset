@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b22a476842921408e9662fce0ad09d, type: 3}
   m_Name: TestLogFIle
   m_EditorClassIdentifier: 
-  fileName: 
+  fileName: NewTestFile

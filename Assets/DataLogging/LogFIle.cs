@@ -6,23 +6,37 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Log file", menuName = "LoggingSystem/New Log file")]
 public class LogFIle : ScriptableObject
 {
-    private string path = Path.Combine(Application.dataPath) + "/Reports";
+    private string directory = Path.Combine(Application.dataPath) + "/Reports";
+    private string path;
+
     public string fileName;
 
     private void OnEnable()
     {
-        if (!Directory.Exists(path))
+        if (!Directory.Exists(directory))
         {
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(directory);
         }
 
-
-        TextWriter tw = new StreamWriter(path + "/" + fileName + ".csv" , false);
+        path = directory + "/" + fileName + ".csv";
+        TextWriter tw = new StreamWriter(path , false);
         tw.WriteLine("Start of the file");
         tw.Close();
     }
 
+    public void WriteLine(string line)
+    {
+        TextWriter tw = new StreamWriter(path, true);
+        tw.Write(line);
+        tw.Close();
+    }
 
+    public void WriteNewLine(string line)
+    {
+        TextWriter tw = new StreamWriter(path, true);
+        tw.WriteLine(line);
+        tw.Close();
+    }
 
 
 }
