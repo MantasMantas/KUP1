@@ -5,11 +5,13 @@ using UnityEngine;
 public class ControllerMove : MonoBehaviour
 {
 
-    public float power = 1f;
 
     public Transform controller, controllerAnchor;
 
+    public float ThumbstickSpeed = 1f, radius = 1f, ElevationOffset = 0f;
+
     private Vector3 offset;
+    private float angle;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,7 @@ public class ControllerMove : MonoBehaviour
     [SerializeField]
     public void ThumbstickInputReach(Vector2 inputValue)
     {
-        offset += new Vector3(0, 0, inputValue.y) * Time.deltaTime * power;
+        offset += new Vector3(0, 0, inputValue.y) * Time.deltaTime * ThumbstickSpeed;
     }
 
     [SerializeField]
@@ -50,7 +52,9 @@ public class ControllerMove : MonoBehaviour
     [SerializeField]
     public void ThumbstickInputHorizontal(Vector2 inputValue)
     {
+        angle = inputValue.x;
 
+        offset = new Vector3(Mathf.Sin(angle), ElevationOffset, Mathf.Cos(angle));
     }
 
 }

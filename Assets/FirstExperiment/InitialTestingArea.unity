@@ -724,7 +724,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1186474448}
         m_TargetAssemblyTypeName: ControllerMove, Assembly-CSharp
-        m_MethodName: ThumbstickInputReach
+        m_MethodName: ThumbstickInputHorizontal
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -802,9 +802,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e3eec5c30a85844afc8bf223069d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 2
   controller: {fileID: 489508218}
   controllerAnchor: {fileID: 1857030528}
+  ThumbstickSpeed: 1
+  radius: 0.001
+  ElevationOffset: 0
 --- !u!1 &1641389090
 GameObject:
   m_ObjectHideFlags: 0
