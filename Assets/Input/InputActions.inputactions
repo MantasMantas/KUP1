@@ -28,6 +28,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ThumbstickPress",
+                    "type": "Button",
+                    "id": "41e47695-637a-4d20-ba72-218743451ff3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -50,6 +59,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Trigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c51334d2-97d9-4dbd-aa7f-221b7bd45673",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerLeft>{LeftHand}/thumbstickclicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThumbstickPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

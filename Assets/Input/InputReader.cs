@@ -13,6 +13,8 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
     // events that act as relays
     public event UnityAction<Vector2> ThumbstickInput = delegate { };
     public event UnityAction TriggerInput = delegate { };
+    public event UnityAction ThumbstickPress = delegate { };
+
     void OnEnable() 
     {
         if(inputActions == null) 
@@ -51,6 +53,14 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
         if(context.phase == InputActionPhase.Performed) 
         {
             TriggerInput.Invoke();
+        }
+    }
+
+    public void OnThumbstickPress(InputAction.CallbackContext context) 
+    {
+        if(context.phase == InputActionPhase.Performed) 
+        {
+            ThumbstickPress.Invoke();
         }
     }
 }

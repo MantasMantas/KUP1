@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
 {
     // external dependancies
     public InputReader inputReader;
-    public VoidEvent triggerPress;
+    public VoidEvent triggerPress, thumbstickPressEvent;
     public Vector2Event thumbstickMove;
 
     void OnEnable()
@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
         inputReader.EnableInputParticipant();
         inputReader.TriggerInput += triggerInput;
         inputReader.ThumbstickInput += thumbstickInput;
+        inputReader.ThumbstickPress+= thumbstickPress;
     }
 
     void OnDisable()
@@ -30,5 +31,10 @@ public class InputManager : MonoBehaviour
     private void thumbstickInput(Vector2 value) 
     {
         thumbstickMove.raiseEvent(value);
+    }
+
+    private void thumbstickPress() 
+    {
+        thumbstickPressEvent.raiseEvent();
     }
 }

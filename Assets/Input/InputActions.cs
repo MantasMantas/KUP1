@@ -50,6 +50,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThumbstickPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""41e47695-637a-4d20-ba72-218743451ff3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -74,6 +83,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Trigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c51334d2-97d9-4dbd-aa7f-221b7bd45673"",
+                    ""path"": ""<XRInputV1::Oculus::OculusTouchControllerLeft>{LeftHand}/thumbstickclicked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThumbstickPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -86,6 +106,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Participant = asset.FindActionMap("Participant", throwIfNotFound: true);
         m_Participant_Thumbstick = m_Participant.FindAction("Thumbstick", throwIfNotFound: true);
         m_Participant_Trigger = m_Participant.FindAction("Trigger", throwIfNotFound: true);
+        m_Participant_ThumbstickPress = m_Participant.FindAction("ThumbstickPress", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -187,12 +208,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IParticipantActions> m_ParticipantActionsCallbackInterfaces = new List<IParticipantActions>();
     private readonly InputAction m_Participant_Thumbstick;
     private readonly InputAction m_Participant_Trigger;
+    private readonly InputAction m_Participant_ThumbstickPress;
     public struct ParticipantActions
     {
         private @InputActions m_Wrapper;
         public ParticipantActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Thumbstick => m_Wrapper.m_Participant_Thumbstick;
         public InputAction @Trigger => m_Wrapper.m_Participant_Trigger;
+        public InputAction @ThumbstickPress => m_Wrapper.m_Participant_ThumbstickPress;
         public InputActionMap Get() { return m_Wrapper.m_Participant; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +231,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Trigger.started += instance.OnTrigger;
             @Trigger.performed += instance.OnTrigger;
             @Trigger.canceled += instance.OnTrigger;
+            @ThumbstickPress.started += instance.OnThumbstickPress;
+            @ThumbstickPress.performed += instance.OnThumbstickPress;
+            @ThumbstickPress.canceled += instance.OnThumbstickPress;
         }
 
         private void UnregisterCallbacks(IParticipantActions instance)
@@ -218,6 +244,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Trigger.started -= instance.OnTrigger;
             @Trigger.performed -= instance.OnTrigger;
             @Trigger.canceled -= instance.OnTrigger;
+            @ThumbstickPress.started -= instance.OnThumbstickPress;
+            @ThumbstickPress.performed -= instance.OnThumbstickPress;
+            @ThumbstickPress.canceled -= instance.OnThumbstickPress;
         }
 
         public void RemoveCallbacks(IParticipantActions instance)
@@ -242,5 +271,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnThumbstick(InputAction.CallbackContext context);
         void OnTrigger(InputAction.CallbackContext context);
+        void OnThumbstickPress(InputAction.CallbackContext context);
     }
 }
