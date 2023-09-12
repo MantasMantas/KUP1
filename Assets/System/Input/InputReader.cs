@@ -14,6 +14,7 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
     public event UnityAction<Vector2> ThumbstickInput = delegate { };
     public event UnityAction TriggerInput = delegate { };
     public event UnityAction ThumbstickPress = delegate { };
+    public event UnityAction<Vector3> ControllerMove = delegate { };
 
     void OnEnable() 
     {
@@ -63,4 +64,11 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
             ThumbstickPress.Invoke();
         }
     }
+
+    public void OnControllerMove(InputAction.CallbackContext context) 
+    {
+        ControllerMove.Invoke(context.ReadValue<Vector3>());
+    }
+
+
 }

@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using System.Linq;
 
 public class ControllerMove : MonoBehaviour
 {
 
 
     public Transform controller, controllerAnchor;
-    public Transform[] bezierPoints;
-    public Transform startArea;
+    public GameObject bezierPoints;
+    public Transform startArea, cursor;
 
     public float ThumbstickSpeed = 1f;
+
+    [Range(0f, 1f)]
+    public float moveValueThreshold;
 
     private Vector3 offsetPos;
     private Quaternion offsetRot;
     private VertexPath vertexPath;
 
-    float moveValue;
-
-    public Transform testObject;
+    private float moveValue;
 
 
     LineRenderer lineRenderer;
@@ -28,14 +30,14 @@ public class ControllerMove : MonoBehaviour
     {
         vertexPath = GeneratePath(bezierPoints, startArea);
         DrawBezierCurve(vertexPath);
+        moveValue = 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //controller.position = controllerAnchor.position + offsetPos;
-        //controller.rotation = controllerAnchor.rotation + offsetRot;
-        testObject.position = offsetPos;
+        cursor.position = offsetPos;
+        cursor.rotation = offsetRot;
     }
 
 
@@ -62,17 +64,17 @@ public class ControllerMove : MonoBehaviour
     {
         //y
         moveValue += (inputValue.y * -1) * Time.deltaTime * ThumbstickSpeed;
-        if(moveValue > 1) 
+        if(moveValue > moveValueThreshold) 
         {
-            moveValue = 1;
+            moveValue = moveValueThreshold;
         }
-        if(moveValue < -1) 
+        if(moveValue < moveValueThreshold * -1) 
         {
-            moveValue = -1;
+            moveValue = moveValueThreshold * -1;
         }
 
-        Debug.Log("Move value: " + moveValue);
         offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
+        offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
         
 
     }
@@ -83,9 +85,18 @@ public class ControllerMove : MonoBehaviour
         //x
     }
 
-    private VertexPath GeneratePath(Transform[] points, Transform originPoint) 
+    [SerializeField]
+    public void ControllerInput(Vector3 inputValue)
     {
-        BezierPath bezierPath = new BezierPath(points, false, PathSpace.xyz);
+        Debug.Log(inputValue);
+    }
+
+    private VertexPath GeneratePath(GameObject points, Transform originPoint) 
+    {
+        Transform[] pointTransforms = points.GetComponentsInChildren<Transform>();
+        pointTransforms = pointTransforms.Where((item, index) => index != 0).ToArray();
+
+        BezierPath bezierPath = new BezierPath(pointTransforms, false, PathSpace.xyz);
 
         return new VertexPath(bezierPath, originPoint);
     }

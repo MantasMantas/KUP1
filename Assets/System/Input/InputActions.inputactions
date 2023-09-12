@@ -37,6 +37,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ControllerMove",
+                    "type": "Value",
+                    "id": "7f66a718-3798-47b1-9646-6ffd2085a056",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ThumbstickPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22095cd3-710e-41f0-9303-c60cd2ff68bf",
+                    "path": "<OculusTouchController>{RightHand}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControllerMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
