@@ -6,13 +6,15 @@ using System.Linq;
 
 public class ControllerMove : MonoBehaviour
 {
-
+    public enum SelectedAxis {x, y, z };
+    public SelectedAxis selectedAxis;
 
     public Transform controller, controllerAnchor;
     public GameObject bezierPoints;
     public Transform startArea, cursor;
 
     public float ThumbstickSpeed = 1f;
+    //public char selectedAxis;
 
     private Vector3 offsetPos;
     private Quaternion offsetRot;
@@ -59,31 +61,19 @@ public class ControllerMove : MonoBehaviour
     [SerializeField]
     public void ThumbstickInputVectical(Vector2 inputValue)
     {
-        OffsetCalculation(inputValue.y);
+        OffsetCalculation(inputValue.y * ThumbstickSpeed * Time.deltaTime);
     }
 
     [SerializeField]
     public void ThumbstickInputHorizontal(Vector2 inputValue)
     {
-        OffsetCalculation(inputValue.x);
+        OffsetCalculation(inputValue.x * ThumbstickSpeed * Time.deltaTime);
     }
 
     [SerializeField]
     public void ControllerInput(Vector3 inputValue)
     {
-        moveValue = inputValue.y - (startArea.position.y/3.5f);
-
-        if (moveValue > 1.25)
-        {
-            moveValue = 1.25f;
-        }
-        if (moveValue < 0)
-        {
-            moveValue = 0;
-        }
-
-        offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
-        offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
+        OffsetCalculationControllerMove(inputValue);
     }
 
     private VertexPath GeneratePath(GameObject points, Transform originPoint) 
@@ -110,7 +100,7 @@ public class ControllerMove : MonoBehaviour
 
     private void OffsetCalculation(float inputValue) 
     {
-        moveValue += inputValue * Time.deltaTime * ThumbstickSpeed;
+        moveValue += inputValue;
         if (moveValue > 1.25)
         {
             moveValue = 1.25f;
@@ -120,7 +110,25 @@ public class ControllerMove : MonoBehaviour
             moveValue = 0;
         }
 
-        Debug.Log(moveValue);
+        offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
+        offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
+    }
+
+    private void OffsetCalculationControllerMove(Vector3 inputValue) 
+    {
+        switch (selectedAxis) 
+        {
+            case SelectedAxis.x:
+                moveValue += inputValue.x - (startArea.position.x / 3.5f);
+                break;
+            case SelectedAxis.y:
+                moveValue += inputValue.y - (startArea.position.y / 3.5f);
+                break;
+            case SelectedAxis.z:
+                moveValue += inputValue.z - (startArea.position.y / 3.5f);
+                break;
+        }
+
         offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
         offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
     }

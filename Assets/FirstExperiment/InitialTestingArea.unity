@@ -788,13 +788,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e3eec5c30a85844afc8bf223069d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedAxis: 1
   controller: {fileID: 489508218}
   controllerAnchor: {fileID: 1857030528}
   bezierPoints: {fileID: 7514329144584320032, guid: 53170a89c7cff374aa1356aba39cbc9e, type: 3}
   startArea: {fileID: 1950176144}
   cursor: {fileID: 1474863676}
   ThumbstickSpeed: 1
-  moveValueThreshold: 0.836
 --- !u!120 &1186474449
 LineRenderer:
   serializedVersion: 2
