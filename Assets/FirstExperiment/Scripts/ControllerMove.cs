@@ -14,9 +14,6 @@ public class ControllerMove : MonoBehaviour
 
     public float ThumbstickSpeed = 1f;
 
-    [Range(0f, 1f)]
-    public float moveValueThreshold;
-
     private Vector3 offsetPos;
     private Quaternion offsetRot;
     private VertexPath vertexPath;
@@ -62,33 +59,31 @@ public class ControllerMove : MonoBehaviour
     [SerializeField]
     public void ThumbstickInputVectical(Vector2 inputValue)
     {
-        //y
-        moveValue += (inputValue.y * -1) * Time.deltaTime * ThumbstickSpeed;
-        if(moveValue > moveValueThreshold) 
-        {
-            moveValue = moveValueThreshold;
-        }
-        if(moveValue < moveValueThreshold * -1) 
-        {
-            moveValue = moveValueThreshold * -1;
-        }
-
-        offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
-        offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
-        
-
+        OffsetCalculation(inputValue.y);
     }
 
     [SerializeField]
     public void ThumbstickInputHorizontal(Vector2 inputValue)
     {
-        //x
+        OffsetCalculation(inputValue.x);
     }
 
     [SerializeField]
     public void ControllerInput(Vector3 inputValue)
     {
-        Debug.Log(inputValue);
+        moveValue = inputValue.y - (startArea.position.y/3.5f);
+
+        if (moveValue > 1.25)
+        {
+            moveValue = 1.25f;
+        }
+        if (moveValue < 0)
+        {
+            moveValue = 0;
+        }
+
+        offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
+        offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
     }
 
     private VertexPath GeneratePath(GameObject points, Transform originPoint) 
@@ -111,6 +106,23 @@ public class ControllerMove : MonoBehaviour
             lineRenderer.SetPosition(i, vertexPath.GetPoint(i));
         }
         
+    }
+
+    private void OffsetCalculation(float inputValue) 
+    {
+        moveValue += inputValue * Time.deltaTime * ThumbstickSpeed;
+        if (moveValue > 1.25)
+        {
+            moveValue = 1.25f;
+        }
+        if (moveValue < 0)
+        {
+            moveValue = 0;
+        }
+
+        Debug.Log(moveValue);
+        offsetPos = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
+        offsetRot = vertexPath.GetRotationAtDistance(moveValue, EndOfPathInstruction.Stop);
     }
 
 }

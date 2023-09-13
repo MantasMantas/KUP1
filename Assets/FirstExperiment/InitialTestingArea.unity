@@ -794,7 +794,7 @@ MonoBehaviour:
   startArea: {fileID: 1950176144}
   cursor: {fileID: 1474863676}
   ThumbstickSpeed: 1
-  moveValueThreshold: 0.855
+  moveValueThreshold: 0.836
 --- !u!120 &1186474449
 LineRenderer:
   serializedVersion: 2

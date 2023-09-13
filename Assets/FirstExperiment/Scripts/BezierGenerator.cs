@@ -22,8 +22,9 @@ public class BezierGenerator : MonoBehaviour
     void Update()
     {
         dstTraveled += speed * Time.deltaTime;
-        testObject.position = vertexPath.GetPointAtDistance(dstTraveled, EndOfPathInstruction.Loop);
-        testObject.rotation = vertexPath.GetRotationAtDistance(dstTraveled, EndOfPathInstruction.Loop);
+        Debug.Log(dstTraveled);
+        testObject.position = vertexPath.GetPointAtDistance(dstTraveled, EndOfPathInstruction.Stop);
+        testObject.rotation = vertexPath.GetRotationAtDistance(dstTraveled, EndOfPathInstruction.Stop);
     }
 
     private VertexPath GeneratePath(Transform[] points, bool closedPath) 

@@ -262,6 +262,7 @@ MonoBehaviour:
   bezierPoints:
   - {fileID: 1003260384}
   - {fileID: 1716608692}
+  - {fileID: 1297132896}
   testObject: {fileID: 1434093805}
   testOrigin: {fileID: 102913728}
   speed: 2
