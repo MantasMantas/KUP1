@@ -119,13 +119,13 @@ public class ControllerMove : MonoBehaviour
         switch (selectedAxis) 
         {
             case SelectedAxis.x:
-                moveValue += inputValue.x - (startArea.position.x / 3.5f);
+                moveValue = inputValue.x - (startArea.position.x / 3.5f);
                 break;
             case SelectedAxis.y:
-                moveValue += inputValue.y - (startArea.position.y / 3.5f);
+                moveValue = inputValue.y - (startArea.position.y / 3.5f);
                 break;
             case SelectedAxis.z:
-                moveValue += inputValue.z - (startArea.position.y / 3.5f);
+                moveValue = inputValue.z - (startArea.position.z / 3.5f);
                 break;
         }
 
