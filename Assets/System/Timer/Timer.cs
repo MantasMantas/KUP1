@@ -6,9 +6,7 @@ public class Timer : MonoBehaviour
 {
     private float timeCount;
     private bool isCounting;
-    private int totalFrames;
    
-
     // external dependencies
     public VoidEvent TimerFinished;
 
@@ -21,7 +19,7 @@ public class Timer : MonoBehaviour
 
     // method for initiating the timer, it is declared as a dynamic function that is able to take in input that is passed trough the event
     [SerializeField]
-    public void SetFrameTimer(int seconds)
+    public void SetFrameTimer(float seconds)
     {
         if (seconds > 0)
         {

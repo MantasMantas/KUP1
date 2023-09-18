@@ -85,7 +85,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fc1383c4-ea2d-433f-9c79-68dceeab7e06"",
-                    ""path"": ""<OculusTouchController>{LeftHand}/triggerPressed"",
+                    ""path"": ""<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/triggerpressed"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

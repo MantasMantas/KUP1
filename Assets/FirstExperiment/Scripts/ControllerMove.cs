@@ -9,18 +9,16 @@ public class ControllerMove : MonoBehaviour
     public enum SelectedAxis {x, y, z };
     public SelectedAxis selectedAxis;
 
-    public Transform controller, controllerAnchor;
     public GameObject bezierPoints;
-    public Transform startArea, cursor;
+    public Transform startArea, cursor, visualMarkerMiddle;
 
     public float ThumbstickSpeed = 1f;
-    //public char selectedAxis;
 
     private Vector3 offsetPos;
     private Quaternion offsetRot;
     private VertexPath vertexPath;
-
     private float moveValue;
+    private bool ControllerOrElse = true;
 
 
     LineRenderer lineRenderer;
@@ -30,6 +28,10 @@ public class ControllerMove : MonoBehaviour
         vertexPath = GeneratePath(bezierPoints, startArea);
         DrawBezierCurve(vertexPath);
         moveValue = 0.5f;
+
+        Vector3 MiddlePoint = vertexPath.GetPointAtDistance(moveValue, EndOfPathInstruction.Stop);
+        visualMarkerMiddle.position = new Vector3(MiddlePoint.x, MiddlePoint.y, MiddlePoint.z - 0.1f);
+
     }
 
     // Update is called once per frame
@@ -39,17 +41,10 @@ public class ControllerMove : MonoBehaviour
         cursor.rotation = offsetRot;
     }
 
-
-    public void TriggerPress() 
-    {
-        // here goes the trigger press logic
-        Debug.Log("Trigger was pressed!!!");
-    }
-
     // reset the position to the default
     public void ThumstickPress() 
     {
-        offsetPos = Vector3.zero;
+        //offsetPos = Vector3.zero;
     }
 
     [SerializeField]
@@ -67,13 +62,29 @@ public class ControllerMove : MonoBehaviour
     [SerializeField]
     public void ThumbstickInputHorizontal(Vector2 inputValue)
     {
-        OffsetCalculation(inputValue.x * ThumbstickSpeed * Time.deltaTime);
+        if(!ControllerOrElse) 
+        {
+            OffsetCalculation(inputValue.x * ThumbstickSpeed * Time.deltaTime);
+        }
     }
 
     [SerializeField]
     public void ControllerInput(Vector3 inputValue)
     {
-        OffsetCalculationControllerMove(inputValue);
+        if (ControllerOrElse) 
+        {
+            OffsetCalculationControllerMove(inputValue);
+        }
+    }
+
+    public void ControllerPositionInput() 
+    {
+        ControllerOrElse = true;
+    }
+
+    public void ThumbstickPositionInput() 
+    {
+        ControllerOrElse = false;
     }
 
     private VertexPath GeneratePath(GameObject points, Transform originPoint) 
