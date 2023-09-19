@@ -26,8 +26,50 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             ""name"": ""Experimentor"",
             ""id"": ""67659982-d3c7-43d3-9b06-d51205cbab74"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""ControllerMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""8afec6ae-edce-4431-af9a-b4b5efa48edc"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Trigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd0b754c-d7e5-4bf2-8826-9fca3d32a651"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9d9b7092-23cc-4b51-bbb5-88d0d38ea0f6"",
+                    ""path"": ""<OculusTouchController>{RightHand}/devicePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControllerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47ac7944-882f-4fb6-9928-6b8bcdb885c9"",
+                    ""path"": ""<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/triggerpressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Trigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         },
         {
             ""name"": ""Participant"",
@@ -43,15 +85,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Trigger"",
-                    ""type"": ""Button"",
-                    ""id"": ""28d8077c-3de3-4673-abdd-812d695cfde6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""ThumbstickPress"",
                     ""type"": ""Button"",
                     ""id"": ""41e47695-637a-4d20-ba72-218743451ff3"",
@@ -59,15 +92,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ControllerMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""7f66a718-3798-47b1-9646-6ffd2085a056"",
-                    ""expectedControlType"": ""Vector3"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -84,34 +108,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""fc1383c4-ea2d-433f-9c79-68dceeab7e06"",
-                    ""path"": ""<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/triggerpressed"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Trigger"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c51334d2-97d9-4dbd-aa7f-221b7bd45673"",
                     ""path"": ""<XRInputV1::Oculus::OculusTouchControllerLeft>{LeftHand}/thumbstickclicked"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ThumbstickPress"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""22095cd3-710e-41f0-9303-c60cd2ff68bf"",
-                    ""path"": ""<OculusTouchController>{RightHand}/devicePosition"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ControllerMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -122,12 +124,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
 }");
         // Experimentor
         m_Experimentor = asset.FindActionMap("Experimentor", throwIfNotFound: true);
+        m_Experimentor_ControllerMove = m_Experimentor.FindAction("ControllerMove", throwIfNotFound: true);
+        m_Experimentor_Trigger = m_Experimentor.FindAction("Trigger", throwIfNotFound: true);
         // Participant
         m_Participant = asset.FindActionMap("Participant", throwIfNotFound: true);
         m_Participant_Thumbstick = m_Participant.FindAction("Thumbstick", throwIfNotFound: true);
-        m_Participant_Trigger = m_Participant.FindAction("Trigger", throwIfNotFound: true);
         m_Participant_ThumbstickPress = m_Participant.FindAction("ThumbstickPress", throwIfNotFound: true);
-        m_Participant_ControllerMove = m_Participant.FindAction("ControllerMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,10 +191,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // Experimentor
     private readonly InputActionMap m_Experimentor;
     private List<IExperimentorActions> m_ExperimentorActionsCallbackInterfaces = new List<IExperimentorActions>();
+    private readonly InputAction m_Experimentor_ControllerMove;
+    private readonly InputAction m_Experimentor_Trigger;
     public struct ExperimentorActions
     {
         private @InputActions m_Wrapper;
         public ExperimentorActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ControllerMove => m_Wrapper.m_Experimentor_ControllerMove;
+        public InputAction @Trigger => m_Wrapper.m_Experimentor_Trigger;
         public InputActionMap Get() { return m_Wrapper.m_Experimentor; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -202,10 +208,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_ExperimentorActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_ExperimentorActionsCallbackInterfaces.Add(instance);
+            @ControllerMove.started += instance.OnControllerMove;
+            @ControllerMove.performed += instance.OnControllerMove;
+            @ControllerMove.canceled += instance.OnControllerMove;
+            @Trigger.started += instance.OnTrigger;
+            @Trigger.performed += instance.OnTrigger;
+            @Trigger.canceled += instance.OnTrigger;
         }
 
         private void UnregisterCallbacks(IExperimentorActions instance)
         {
+            @ControllerMove.started -= instance.OnControllerMove;
+            @ControllerMove.performed -= instance.OnControllerMove;
+            @ControllerMove.canceled -= instance.OnControllerMove;
+            @Trigger.started -= instance.OnTrigger;
+            @Trigger.performed -= instance.OnTrigger;
+            @Trigger.canceled -= instance.OnTrigger;
         }
 
         public void RemoveCallbacks(IExperimentorActions instance)
@@ -228,17 +246,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Participant;
     private List<IParticipantActions> m_ParticipantActionsCallbackInterfaces = new List<IParticipantActions>();
     private readonly InputAction m_Participant_Thumbstick;
-    private readonly InputAction m_Participant_Trigger;
     private readonly InputAction m_Participant_ThumbstickPress;
-    private readonly InputAction m_Participant_ControllerMove;
     public struct ParticipantActions
     {
         private @InputActions m_Wrapper;
         public ParticipantActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Thumbstick => m_Wrapper.m_Participant_Thumbstick;
-        public InputAction @Trigger => m_Wrapper.m_Participant_Trigger;
         public InputAction @ThumbstickPress => m_Wrapper.m_Participant_ThumbstickPress;
-        public InputAction @ControllerMove => m_Wrapper.m_Participant_ControllerMove;
         public InputActionMap Get() { return m_Wrapper.m_Participant; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -251,15 +265,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Thumbstick.started += instance.OnThumbstick;
             @Thumbstick.performed += instance.OnThumbstick;
             @Thumbstick.canceled += instance.OnThumbstick;
-            @Trigger.started += instance.OnTrigger;
-            @Trigger.performed += instance.OnTrigger;
-            @Trigger.canceled += instance.OnTrigger;
             @ThumbstickPress.started += instance.OnThumbstickPress;
             @ThumbstickPress.performed += instance.OnThumbstickPress;
             @ThumbstickPress.canceled += instance.OnThumbstickPress;
-            @ControllerMove.started += instance.OnControllerMove;
-            @ControllerMove.performed += instance.OnControllerMove;
-            @ControllerMove.canceled += instance.OnControllerMove;
         }
 
         private void UnregisterCallbacks(IParticipantActions instance)
@@ -267,15 +275,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Thumbstick.started -= instance.OnThumbstick;
             @Thumbstick.performed -= instance.OnThumbstick;
             @Thumbstick.canceled -= instance.OnThumbstick;
-            @Trigger.started -= instance.OnTrigger;
-            @Trigger.performed -= instance.OnTrigger;
-            @Trigger.canceled -= instance.OnTrigger;
             @ThumbstickPress.started -= instance.OnThumbstickPress;
             @ThumbstickPress.performed -= instance.OnThumbstickPress;
             @ThumbstickPress.canceled -= instance.OnThumbstickPress;
-            @ControllerMove.started -= instance.OnControllerMove;
-            @ControllerMove.performed -= instance.OnControllerMove;
-            @ControllerMove.canceled -= instance.OnControllerMove;
         }
 
         public void RemoveCallbacks(IParticipantActions instance)
@@ -295,12 +297,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public ParticipantActions @Participant => new ParticipantActions(this);
     public interface IExperimentorActions
     {
+        void OnControllerMove(InputAction.CallbackContext context);
+        void OnTrigger(InputAction.CallbackContext context);
     }
     public interface IParticipantActions
     {
         void OnThumbstick(InputAction.CallbackContext context);
-        void OnTrigger(InputAction.CallbackContext context);
         void OnThumbstickPress(InputAction.CallbackContext context);
-        void OnControllerMove(InputAction.CallbackContext context);
     }
 }

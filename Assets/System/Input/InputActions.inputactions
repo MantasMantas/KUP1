@@ -4,8 +4,50 @@
         {
             "name": "Experimentor",
             "id": "67659982-d3c7-43d3-9b06-d51205cbab74",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "ControllerMove",
+                    "type": "Value",
+                    "id": "8afec6ae-edce-4431-af9a-b4b5efa48edc",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Trigger",
+                    "type": "Button",
+                    "id": "dd0b754c-d7e5-4bf2-8826-9fca3d32a651",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9d9b7092-23cc-4b51-bbb5-88d0d38ea0f6",
+                    "path": "<OculusTouchController>{RightHand}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControllerMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47ac7944-882f-4fb6-9928-6b8bcdb885c9",
+                    "path": "<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/triggerpressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Trigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         },
         {
             "name": "Participant",
@@ -21,15 +63,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Trigger",
-                    "type": "Button",
-                    "id": "28d8077c-3de3-4673-abdd-812d695cfde6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ThumbstickPress",
                     "type": "Button",
                     "id": "41e47695-637a-4d20-ba72-218743451ff3",
@@ -37,15 +70,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "ControllerMove",
-                    "type": "Value",
-                    "id": "7f66a718-3798-47b1-9646-6ffd2085a056",
-                    "expectedControlType": "Vector3",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -62,34 +86,12 @@
                 },
                 {
                     "name": "",
-                    "id": "fc1383c4-ea2d-433f-9c79-68dceeab7e06",
-                    "path": "<XRInputV1::Oculus::OculusTouchControllerRight>{RightHand}/triggerpressed",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Trigger",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c51334d2-97d9-4dbd-aa7f-221b7bd45673",
                     "path": "<XRInputV1::Oculus::OculusTouchControllerLeft>{LeftHand}/thumbstickclicked",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ThumbstickPress",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "22095cd3-710e-41f0-9303-c60cd2ff68bf",
-                    "path": "<OculusTouchController>{RightHand}/devicePosition",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControllerMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

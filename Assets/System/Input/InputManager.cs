@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     void OnEnable()
     {
-        inputReader.EnableInputParticipant();
+        inputReader.EnableInputExperimentor();
         inputReader.TriggerInput += triggerInput;
         inputReader.ThumbstickInput += thumbstickInput;
         inputReader.ThumbstickPress += thumbstickPress;
@@ -43,5 +43,15 @@ public class InputManager : MonoBehaviour
     private void ControllerInput(Vector3 value) 
     {
         ControllerMove.raiseEvent(value);
+    }
+
+    public void EnableExpControl() 
+    {
+        inputReader.EnableInputExperimentor();
+    }
+
+    public void EnablePartControl() 
+    {
+        inputReader.EnableInputParticipant();
     }
 }

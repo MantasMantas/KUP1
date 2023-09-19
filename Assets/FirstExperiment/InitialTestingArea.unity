@@ -1369,6 +1369,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1515021171}
   - component: {fileID: 1515021172}
+  - component: {fileID: 1515021174}
+  - component: {fileID: 1515021173}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1408,6 +1410,62 @@ MonoBehaviour:
   thumbstickPressEvent: {fileID: 11400000, guid: 8d581da3805d0724ba2016175ce1e92d, type: 2}
   thumbstickMove: {fileID: 11400000, guid: 3a9e87e6dcf39454b9b2bdf472b740d7, type: 2}
   ControllerMove: {fileID: 11400000, guid: 433be9caac2488e4bb5a679c6ccfd1a5, type: 2}
+--- !u!114 &1515021173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515021170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a636b3ecd734843afae120a5bdb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voidEvent: {fileID: 11400000, guid: f2325c7c4fff1e7408393a3b19528010, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1515021172}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: EnableExpControl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1515021174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515021170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a636b3ecd734843afae120a5bdb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voidEvent: {fileID: 11400000, guid: 4b2e1483f9fcb164fa4b2b4d93be3fb5, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1515021172}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: EnablePartControl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1523698304
 GameObject:
   m_ObjectHideFlags: 0
