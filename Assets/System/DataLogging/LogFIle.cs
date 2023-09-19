@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Log file", menuName = "LoggingSystem/New Log file")]
-public class LogFIle : ScriptableObject
+public class LogFile : ScriptableObject
 {
     private string directory = Path.Combine(Application.dataPath) + "/Reports";
     private string path;

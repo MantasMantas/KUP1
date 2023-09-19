@@ -25,6 +25,8 @@ public class Timer : MonoBehaviour
         {
             isCounting = true;
             timeCount = seconds;
+
+            //Debug.Log("Timer started with: " + seconds + " Seconds");
         }
         else
         {
@@ -37,12 +39,12 @@ public class Timer : MonoBehaviour
 
         if (isCounting)
         {
-            if (timeCount == 0)
+            if (timeCount <= 0)
             {
                 CounterStop();
             }
 
-            timeCount =- Time.deltaTime;
+            timeCount -= Time.deltaTime;
             
         }
     }
@@ -51,6 +53,7 @@ public class Timer : MonoBehaviour
     {
         isCounting = false;
         TimerFinished.raiseEvent();
+        //Debug.Log("TimerFinished!!!!!");
         // Debug.Log("The frames have run out!");
         // Debug.Log("Total frames: " + totalFrames + "\n Total time: " + totalTime * 1000f + "ms");
     }

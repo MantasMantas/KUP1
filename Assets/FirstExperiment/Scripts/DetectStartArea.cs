@@ -11,6 +11,7 @@ public class DetectStartArea : MonoBehaviour
     private void OnEnable()
     {
         renderer = GetComponent<Renderer>();
+        inStartArea.DisableFlag();
     }
 
     private void OnTriggerEnter(Collider other)

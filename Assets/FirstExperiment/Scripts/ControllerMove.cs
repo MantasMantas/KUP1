@@ -12,7 +12,7 @@ public class ControllerMove : MonoBehaviour
     public GameObject bezierPoints;
     public Transform startArea, cursor, visualMarkerMiddle;
 
-    public float ThumbstickSpeed = 1f;
+    public float ThumbstickSpeed = 1f, CursorLevel = 2f;
 
     private Vector3 offsetPos;
     private Quaternion offsetRot;
@@ -133,10 +133,10 @@ public class ControllerMove : MonoBehaviour
                 moveValue = inputValue.x - (startArea.position.x / 3.5f);
                 break;
             case SelectedAxis.y:
-                moveValue = inputValue.y - (startArea.position.y / 3.5f);
+                moveValue = inputValue.y - (startArea.position.y / CursorLevel);
                 break;
             case SelectedAxis.z:
-                moveValue = inputValue.z - (startArea.position.z / 3.5f);
+                moveValue = inputValue.z - (startArea.position.z / CursorLevel);
                 break;
         }
 

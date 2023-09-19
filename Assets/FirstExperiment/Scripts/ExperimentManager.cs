@@ -7,14 +7,20 @@ public class ExperimentManager : MonoBehaviour
 
     public ExperimentConfiguration experimentConfiguration;
     public Flag inStartArea;
-    public VoidEvent trialStart;
+    public VoidEvent trialStart, trialEnd;
     public FloatEvent TimerStart;
+
+    public float TimeOutDuration = 5f;
+
+    public LogFile logFile;
+
+    public Transform CursorPos;
 
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        audioSource= GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,11 +35,16 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("Trigger was pressed!!!");
         if (inStartArea.GetFlag())
         {
-            trialStart.raiseEvent();
-            audioSource.clip = experimentConfiguration.GetVibration();
+            AudioClip audioClip = experimentConfiguration.GetVibration();
+            float duration = experimentConfiguration.GetDuration();
 
-            TimerStart.raiseEvent(experimentConfiguration.GetDuration());
+            trialStart.raiseEvent();
+            TimerStart.raiseEvent(duration);
+
+            audioSource.clip = audioClip;
             audioSource.Play();
+
+            logFile.WriteNewLine(audioClip.name + ": " + duration);
         }
         else
         {
@@ -44,6 +55,9 @@ public class ExperimentManager : MonoBehaviour
     public void TimerExpired() 
     {
         audioSource.Stop();
+        trialEnd.raiseEvent();
+        logFile.WriteNewLine("Cursor position: " + CursorPos.position);
+        //TimerStart.raiseEvent(TimeOutDuration);
     }
 
 }
