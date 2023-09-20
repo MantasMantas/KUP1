@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 using System.Linq;
@@ -9,6 +7,23 @@ public class PathSO : ScriptableObject
 {
     public GameObject BezierPoints;
 
+    private VertexPath vertexPath;
+
+    public void InitializePath(Transform originPoint) 
+    {
+        GeneratePath(BezierPoints, originPoint);
+    }
+
+    public Vector3 GetPointInPath(float point) 
+    {
+        return vertexPath.GetPointAtDistance(point, EndOfPathInstruction.Stop);
+    }
+
+    public Quaternion GetRotationInPath(float point) 
+    {
+        return vertexPath.GetRotationAtDistance(point, EndOfPathInstruction.Stop);
+    }
+
     private VertexPath GeneratePath(GameObject points, Transform originPoint) 
     {
         Transform[] pointTransforms = points.GetComponentsInChildren<Transform>();
@@ -17,5 +32,16 @@ public class PathSO : ScriptableObject
         BezierPath bezierPath = new BezierPath(pointTransforms, false, PathSpace.xyz);
 
         return new VertexPath(bezierPath, originPoint);
+    }
+
+    private void DrawPath(VertexPath vertexPath, LineRenderer lineRenderer)
+    {
+        lineRenderer.positionCount = vertexPath.NumPoints;
+
+        for (int i = 0; i < vertexPath.NumPoints; i++)
+        {
+            lineRenderer.SetPosition(i, vertexPath.GetPoint(i));
+        }
+
     }
 }
