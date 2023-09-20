@@ -11,6 +11,8 @@ public class LogFile : ScriptableObject
 
     public string fileName;
 
+    private int fileNumber = 1;
+
     private void OnEnable()
     {
         if (!Directory.Exists(directory))
@@ -18,10 +20,12 @@ public class LogFile : ScriptableObject
             Directory.CreateDirectory(directory);
         }
 
-        path = directory + "/" + fileName + ".csv";
+        path = directory + "/" + fileName + fileNumber + ".csv";
         TextWriter tw = new StreamWriter(path , false);
         tw.WriteLine("Start of the file");
         tw.Close();
+
+        fileNumber++;
     }
 
     public void WriteLine(string line)
