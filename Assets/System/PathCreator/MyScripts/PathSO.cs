@@ -6,12 +6,13 @@ using System.Linq;
 public class PathSO : ScriptableObject
 {
     public GameObject BezierPoints;
+    public bool DisplayPath;
 
     private VertexPath vertexPath;
 
-    public void InitializePath(Transform originPoint) 
+    public void InitializePath(Transform originPoint, LineRenderer lineRenderer) 
     {
-        GeneratePath(BezierPoints, originPoint);
+       vertexPath = GeneratePath(BezierPoints, originPoint, lineRenderer);
     }
 
     public Vector3 GetPointInPath(float point) 
@@ -24,14 +25,36 @@ public class PathSO : ScriptableObject
         return vertexPath.GetRotationAtDistance(point, EndOfPathInstruction.Stop);
     }
 
-    private VertexPath GeneratePath(GameObject points, Transform originPoint) 
+    public Vector3 GetClosestPointToPath(Vector3 point) 
+    {
+        return vertexPath.GetClosestPointOnPath(point);
+    }
+
+    public Quaternion GetClosestRotationToPath(Vector3 point) 
+    {
+        return vertexPath.GetRotationAtDistance(vertexPath.GetClosestTimeOnPath(point));
+    }
+
+    public float GetClosestCurveValue(Vector3 point) 
+    {
+        return vertexPath.GetClosestTimeOnPath(point);
+    }
+
+    private VertexPath GeneratePath(GameObject points, Transform originPoint, LineRenderer lineRenderer) 
     {
         Transform[] pointTransforms = points.GetComponentsInChildren<Transform>();
         pointTransforms = pointTransforms.Where((item, index) => index != 0).ToArray();
 
         BezierPath bezierPath = new BezierPath(pointTransforms, false, PathSpace.xyz);
 
-        return new VertexPath(bezierPath, originPoint);
+        VertexPath vertexPath = new VertexPath(bezierPath, originPoint);
+
+        if (DisplayPath) 
+        {
+            DrawPath(vertexPath, lineRenderer);
+        }
+
+        return vertexPath;
     }
 
     private void DrawPath(VertexPath vertexPath, LineRenderer lineRenderer)
