@@ -12,7 +12,7 @@ public class PathManager : MonoBehaviour
     private Transform StartArea;
     private LineRenderer lineRenderer;
 
-    [Range(0f, 1.25f)]
+    [Range(0f, 1f)]
     private float CurveValue;
     // Start is called before the first frame update
     void Start()
