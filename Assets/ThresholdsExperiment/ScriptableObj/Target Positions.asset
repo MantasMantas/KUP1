@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bd5edf91947c64b96ec0ff195c9ecc, type: 3}
   m_Name: Target Positions
   m_EditorClassIdentifier: 
-  targetPositions: []
+  targetPositions:
+  - 0
+  - 1
+  - 0.5
+  - 0.2
+  - 0.7
+  - 0.3
+  - 0.8
+  - 0.4
