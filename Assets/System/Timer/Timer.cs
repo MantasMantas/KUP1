@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
 
     // method for initiating the timer, it is declared as a dynamic function that is able to take in input that is passed trough the event
     [SerializeField]
-    public void SetFrameTimer(float seconds)
+    public void SetTimer(float seconds)
     {
         if (seconds > 0)
         {

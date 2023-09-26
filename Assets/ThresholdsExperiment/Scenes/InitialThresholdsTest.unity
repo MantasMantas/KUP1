@@ -501,6 +501,8 @@ Transform:
   m_Children:
   - {fileID: 1643518124}
   - {fileID: 2096531581}
+  - {fileID: 1956126578}
+  - {fileID: 1562054549}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &381643893
@@ -1148,6 +1150,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 640575408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1562054548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1562054549}
+  - component: {fileID: 1562054551}
+  - component: {fileID: 1562054550}
+  m_Layer: 0
+  m_Name: Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1562054549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562054548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 374220378}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1562054550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562054548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e2961b57c631c41855f6e306811764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatEvent: {fileID: 11400000, guid: 07b68cb6c7914ed439f5e0ffcfda3d22, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1562054551}
+        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
+        m_MethodName: SetTimer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1562054551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562054548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0eed86f895610419def60db127f42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimerFinished: {fileID: 11400000, guid: f9b1dcb590b6e864c823fef769753d9d, type: 2}
 --- !u!1 &1643518123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,6 +1654,7 @@ MonoBehaviour:
   materials: {fileID: 11400000, guid: 09e9cad85aedecf489c4d973c1c7f4dd, type: 2}
   inStartArea: {fileID: 11400000, guid: a67d8f475187edc469db5308285ffd45, type: 2}
   TargetEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
+  StartAreaEvent: {fileID: 11400000, guid: c6c0661c57cfda345b6a881f52110835, type: 2}
 --- !u!54 &1858389578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1605,6 +1682,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1956126577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956126578}
+  - component: {fileID: 1956126579}
+  m_Layer: 0
+  m_Name: ExperimentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1956126578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956126577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 374220378}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956126579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956126577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7cc1bcd08d396c4f824a11aa53e97df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2059838994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1806,7 @@ MonoBehaviour:
   materials: {fileID: 11400000, guid: 09e9cad85aedecf489c4d973c1c7f4dd, type: 2}
   inStartArea: {fileID: 11400000, guid: a67d8f475187edc469db5308285ffd45, type: 2}
   TargetEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
+  StartAreaEvent: {fileID: 0}
 --- !u!54 &2059838998
 Rigidbody:
   m_ObjectHideFlags: 0

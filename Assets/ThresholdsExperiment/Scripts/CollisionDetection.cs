@@ -7,7 +7,7 @@ public class CollisionDetection : MonoBehaviour
 
     public MaterialsList materials;
     public Flag inStartArea;
-    public VoidEvent TargetEvent;
+    public VoidEvent TargetEvent, StartAreaEvent;
 
     private Renderer renderer;
 
@@ -21,7 +21,12 @@ public class CollisionDetection : MonoBehaviour
     {
         if(this.name == "StartArea") 
         {
-            inStartArea.EnableFlag();
+            if (!inStartArea.GetFlag()) 
+            {
+                inStartArea.EnableFlag();
+                StartAreaEvent.raiseEvent();
+
+            }
         }
         if(this.name == "Target") 
         {
@@ -35,7 +40,10 @@ public class CollisionDetection : MonoBehaviour
     {
         if (this.name == "StartArea")
         {
-            inStartArea.DisableFlag();
+            if (inStartArea.GetFlag()) 
+            {
+                inStartArea.DisableFlag();
+            }
         }
 
         AssignMaterial(materials.GetDefault());
