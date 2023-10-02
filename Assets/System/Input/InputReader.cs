@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Scriptable Objects/InputReader/New Input Reader")]
-public class InputReader : ScriptableObject, InputActions.IExperimentorActions, InputActions.IParticipantActions
+public class InputReader : ScriptableObject, InputActions.IExperimentorActions, InputActions.IParticipantActions, InputActions.IKeyboardActions
 {
     // internal variables
     private InputActions inputActions;
@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
     public event UnityAction TriggerInput = delegate { };
     public event UnityAction ThumbstickPress = delegate { };
     public event UnityAction<Vector3> ControllerMove = delegate { };
+    public event UnityAction SpacebarEvent = delegate { };
 
     void OnEnable() 
     {
@@ -23,6 +24,7 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
             inputActions = new InputActions();
             inputActions.Experimentor.SetCallbacks(this);
             inputActions.Participant.SetCallbacks(this);
+            inputActions.Keyboard.SetCallbacks(this);
         }
     }
 
@@ -42,6 +44,16 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
     {
         inputActions.Experimentor.Disable();
         inputActions.Participant.Disable();
+    }
+
+    public void EnableKeyboard() 
+    {
+        inputActions.Keyboard.Enable();
+    }
+
+    public void DisableKeyboard() 
+    {
+        inputActions.Keyboard.Disable(); 
     }
 
     public void OnThumbstick(InputAction.CallbackContext context) 
@@ -70,5 +82,11 @@ public class InputReader : ScriptableObject, InputActions.IExperimentorActions, 
         ControllerMove.Invoke(context.ReadValue<Vector3>());
     }
 
-
+    public void OnSpacebar(InputAction.CallbackContext context) 
+    {
+        if(context.phase == InputActionPhase.Performed) 
+        {
+            SpacebarEvent.Invoke();
+        }
+    }
 }

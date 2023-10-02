@@ -118,6 +118,34 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""4b9d97f8-43ee-4c6b-8dde-607dc0457508"",
+            ""actions"": [
+                {
+                    ""name"": ""Spacebar"",
+                    ""type"": ""Button"",
+                    ""id"": ""52f28307-431a-4be2-97c2-3c4e58707fdf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9808315d-7e49-4b25-9b34-507aefe8d673"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spacebar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -130,6 +158,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Participant = asset.FindActionMap("Participant", throwIfNotFound: true);
         m_Participant_Thumbstick = m_Participant.FindAction("Thumbstick", throwIfNotFound: true);
         m_Participant_ThumbstickPress = m_Participant.FindAction("ThumbstickPress", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_Spacebar = m_Keyboard.FindAction("Spacebar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +326,52 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public ParticipantActions @Participant => new ParticipantActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
+    private readonly InputAction m_Keyboard_Spacebar;
+    public struct KeyboardActions
+    {
+        private @InputActions m_Wrapper;
+        public KeyboardActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Spacebar => m_Wrapper.m_Keyboard_Spacebar;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void AddCallbacks(IKeyboardActions instance)
+        {
+            if (instance == null || m_Wrapper.m_KeyboardActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_KeyboardActionsCallbackInterfaces.Add(instance);
+            @Spacebar.started += instance.OnSpacebar;
+            @Spacebar.performed += instance.OnSpacebar;
+            @Spacebar.canceled += instance.OnSpacebar;
+        }
+
+        private void UnregisterCallbacks(IKeyboardActions instance)
+        {
+            @Spacebar.started -= instance.OnSpacebar;
+            @Spacebar.performed -= instance.OnSpacebar;
+            @Spacebar.canceled -= instance.OnSpacebar;
+        }
+
+        public void RemoveCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            foreach (var item in m_Wrapper.m_KeyboardActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_KeyboardActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IExperimentorActions
     {
         void OnControllerMove(InputAction.CallbackContext context);
@@ -304,5 +381,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnThumbstick(InputAction.CallbackContext context);
         void OnThumbstickPress(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnSpacebar(InputAction.CallbackContext context);
     }
 }
