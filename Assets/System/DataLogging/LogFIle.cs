@@ -11,9 +11,9 @@ public class LogFile : ScriptableObject
 
     public string fileName;
 
-    private int fileNumber = 1;
+    public int fileNumber = 1;
 
-    private void OnEnable()
+    public void StartTheLog(string Header) 
     {
         if (!Directory.Exists(directory))
         {
@@ -21,8 +21,8 @@ public class LogFile : ScriptableObject
         }
 
         path = directory + "/" + fileName + fileNumber + ".csv";
-        TextWriter tw = new StreamWriter(path , false);
-        tw.WriteLine("Start of the file");
+        TextWriter tw = new StreamWriter(path, false);
+        tw.WriteLine(Header);
         tw.Close();
 
         fileNumber++;

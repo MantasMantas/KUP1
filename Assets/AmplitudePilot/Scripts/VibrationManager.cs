@@ -5,11 +5,17 @@ using UnityEngine;
 public class VibrationManager : MonoBehaviour
 {
 
+    public LogFile logFile;
+
     private AudioSource audioSource;
+    private float volumeValue, timeElapsed;
+    private string Header = "Channel(-1 left|| 1 right), G(0-22 || 1-6.5 .25), Detected?, if true time in milis,";
+    private bool wasDetected;
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        logFile.StartTheLog(Header);
     }
 
     // Update is called once per frame
@@ -27,8 +33,6 @@ public class VibrationManager : MonoBehaviour
     [SerializeField]
     public void SetVolume(int value) 
     {
-        float volumeValue;
-
         switch(value) 
         {
             case 0: volumeValue = 0.734f; // 6.5G
@@ -83,4 +87,10 @@ public class VibrationManager : MonoBehaviour
 
         audioSource.volume = volumeValue;
     }
+
+    public void LogTheAnswer() 
+    {
+        logFile.WriteNewLine(audioSource.panStereo.ToString() + "," + volumeValue + "," + wasDetected + "," + timeElapsed);
+    }
+
 }
