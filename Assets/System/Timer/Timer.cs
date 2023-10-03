@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("The frame amount you inputed is invalid!");
+            Debug.LogWarning("The amount you inputed is invalid!");
         }
     }
 
@@ -47,14 +47,12 @@ public class Timer : MonoBehaviour
             timeCount -= Time.deltaTime;
             
         }
+
     }
 
     private void CounterStop()
     {
         isCounting = false;
         TimerFinished.raiseEvent();
-        //Debug.Log("TimerFinished!!!!!");
-        // Debug.Log("The frames have run out!");
-        // Debug.Log("Total frames: " + totalFrames + "\n Total time: " + totalTime * 1000f + "ms");
     }
 }

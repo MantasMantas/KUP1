@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TExperimentManager : MonoBehaviour
 {
+    public TExperimentConfiguration experimentConfig;
     public FloatEvent TimerStart;
-    public float Duration;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class TExperimentManager : MonoBehaviour
 
     public void StartAreaTrigger() 
     {
-        TimerStart.raiseEvent(Duration);
+        
     }
 
     
