@@ -15,7 +15,8 @@ public class CollisionDetection : MonoBehaviour
     {
         renderer = GetComponent<Renderer>();
         AssignMaterial(materials.GetDefault());
-    } 
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {

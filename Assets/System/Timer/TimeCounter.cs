@@ -1,21 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TimeCounter : MonoBehaviour
+public class TimeCounter
 {
     private bool isCounting;
     private float timeCount;
 
-    public FloatEvent TimeElapsed;
-   
-
-    // Update is called once per frame
-    void Update()
-    {
-        CounterUpdates();
-    }
-
+    public TimeCounter() { }
     public void SetTimeCount() 
     {
         timeCount = 0;
@@ -37,7 +28,7 @@ public class TimeCounter : MonoBehaviour
         isCounting = false;
         return timeCount;
     }
-    private void CounterUpdates() 
+    public void CounterUpdates() 
     {
         if (isCounting) 
         {
