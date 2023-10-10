@@ -6,10 +6,13 @@ public class CollisionDetection : MonoBehaviour
 {
 
     public MaterialsList materials;
-    public Flag inStartArea;
     public VoidEvent TargetEvent, StartAreaEvent;
+    public TExperimentConfiguration experimentConfig;
 
     private Renderer renderer;
+    private bool counting;
+    private float counter, threshold;
+    private VoidEvent currentEvent;
 
     private void OnEnable()
     {
@@ -17,35 +20,49 @@ public class CollisionDetection : MonoBehaviour
         AssignMaterial(materials.GetDefault());
     }
 
+    private void Update()
+    {
+        if (counting) 
+        {
+            if(counter >= threshold) 
+            {
+                counting = false;
+                currentEvent.raiseEvent();
+                counter = 0;
+                return;
+            }
+
+            counter += Time.deltaTime;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(this.name == "StartArea") 
+        if (!counting) 
         {
-            if (!inStartArea.GetFlag()) 
+            counting = true;
+            if (this.name == "StartArea")
             {
-                inStartArea.EnableFlag();
-                StartAreaEvent.raiseEvent();
-
+                threshold = experimentConfig.startTouchingDuration;
+                currentEvent = StartAreaEvent;
             }
+
+            if (this.name == "Target")
+            {
+                threshold = experimentConfig.targetTouchDuration;
+                currentEvent = TargetEvent;
+            }
+
         }
-        if(this.name == "Target") 
-        {
-            TargetEvent.raiseEvent();
-        }
+       
 
         AssignMaterial(materials.GetTouching());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (this.name == "StartArea")
-        {
-            if (inStartArea.GetFlag()) 
-            {
-                inStartArea.DisableFlag();
-            }
-        }
+        counting = false;
+        counter = 0;
 
         AssignMaterial(materials.GetDefault());
     }
