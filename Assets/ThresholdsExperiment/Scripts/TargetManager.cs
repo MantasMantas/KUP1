@@ -17,7 +17,7 @@ public class TargetManager : MonoBehaviour
 
     public void TargetPlacement() 
     {
-        //target.position = path.GetPointInPath(targetPositions.GetRandomTargetPosition());
+        target.position = path.GetPointInPath(Random.Range(0f,1f));
     }
 
 }
