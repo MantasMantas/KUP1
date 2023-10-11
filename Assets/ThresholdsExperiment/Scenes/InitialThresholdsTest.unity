@@ -916,7 +916,7 @@ Transform:
   m_GameObject: {fileID: 1852442070}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.14, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1236,8 +1236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials: {fileID: 11400000, guid: 09e9cad85aedecf489c4d973c1c7f4dd, type: 2}
-  TargetEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
-  StartAreaEvent: {fileID: 11400000, guid: c6c0661c57cfda345b6a881f52110835, type: 2}
+  EventToCall: {fileID: 11400000, guid: c6c0661c57cfda345b6a881f52110835, type: 2}
   experimentConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
 --- !u!54 &1858389578
 Rigidbody:
@@ -1338,6 +1337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956126578}
   - component: {fileID: 1956126579}
+  - component: {fileID: 1956126580}
   m_Layer: 0
   m_Name: ExperimentManager
   m_TagString: Untagged
@@ -1375,6 +1375,46 @@ MonoBehaviour:
   experimentConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   TimerStart: {fileID: 11400000, guid: 07b68cb6c7914ed439f5e0ffcfda3d22, type: 2}
   StartAreaFocus: {fileID: 11400000, guid: 84e695e88e4fa3c40bcdae7846c23096, type: 2}
+--- !u!114 &1956126580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956126577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a636b3ecd734843afae120a5bdb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voidEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1956126579}
+        m_TargetAssemblyTypeName: TExperimentManager, Assembly-CSharp
+        m_MethodName: TargetEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2059838994}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2059838994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,7 +1436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2059838995
 Transform:
   m_ObjectHideFlags: 0
@@ -1453,8 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materials: {fileID: 11400000, guid: 09e9cad85aedecf489c4d973c1c7f4dd, type: 2}
-  TargetEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
-  StartAreaEvent: {fileID: 11400000, guid: c6c0661c57cfda345b6a881f52110835, type: 2}
+  EventToCall: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
   experimentConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
 --- !u!54 &2059838998
 Rigidbody:
@@ -1596,7 +1635,6 @@ GameObject:
   - component: {fileID: 2096531581}
   - component: {fileID: 2096531582}
   - component: {fileID: 2096531585}
-  - component: {fileID: 2096531584}
   - component: {fileID: 2096531583}
   m_Layer: 0
   m_Name: TargetManager
@@ -1673,34 +1711,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &2096531584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096531580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a636b3ecd734843afae120a5bdb8f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voidEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1562054551}
-        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
-        m_MethodName: SetTimer
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 7
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2096531585
 MonoBehaviour:
