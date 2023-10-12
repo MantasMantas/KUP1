@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "T experiment config", menuName = "Scriptable Objects/Experiment/T experiment config")]
 public class TExperimentConfiguration : ScriptableObject
 {
-    public int NumberOfTrials  = 60;
+    public PathShapes pathShapes;
+    public int NumberOfTrials = 10;
 
     public float startTouchingDuration, targetTouchDuration, restDuration;
 
@@ -100,7 +101,6 @@ public class TExperimentConfiguration : ScriptableObject
         return volumeValue;
     }
 
-
 }
 
 public enum Gvalues 
@@ -129,4 +129,11 @@ public enum Gvalues
    G1n5,
    G1n25,
    G1
+}
+
+public enum PathShapes
+{
+    Horizontal,
+    Vertical,
+    Reaching
 }

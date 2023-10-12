@@ -5,14 +5,34 @@ using System.Linq;
 [CreateAssetMenu(fileName = "PathSO", menuName = "Scriptable Objects/Path/New Path SO")]
 public class PathSO : ScriptableObject
 {
-    public GameObject BezierPoints;
+    public GameObject[] paths;
+    public TExperimentConfiguration experimentalConfig;
     public bool DisplayPath;
 
     private VertexPath vertexPath;
+    private GameObject bezierPoints;
+
+    private void OnValidate()
+    {
+        switch (experimentalConfig.pathShapes) 
+        {
+            case PathShapes.Horizontal:
+                bezierPoints = paths[0];
+                break;
+            case PathShapes.Vertical:
+                bezierPoints = paths[1];
+                break;
+            case PathShapes.Reaching:
+                bezierPoints = paths[2];
+                break;
+            default: Debug.LogWarning("Something wrong with pathSO paths");
+                break;
+        }
+    }
 
     public void InitializePath(Transform originPoint, LineRenderer lineRenderer) 
     {
-       vertexPath = GeneratePath(BezierPoints, originPoint, lineRenderer);
+       vertexPath = GeneratePath(bezierPoints, originPoint, lineRenderer);
     }
 
     public Vector3 GetPointInPath(float point) 
@@ -68,3 +88,5 @@ public class PathSO : ScriptableObject
 
     }
 }
+
+

@@ -325,7 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2209859711867722356}
   m_Layer: 0
-  m_Name: BezierPointsVertical
+  m_Name: pathVertical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

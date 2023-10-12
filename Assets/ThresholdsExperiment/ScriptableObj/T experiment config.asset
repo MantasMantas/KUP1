@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ea0762e5d2b5c47a7f53f14473019f, type: 3}
   m_Name: T experiment config
   m_EditorClassIdentifier: 
+  paths:
+  - {fileID: 7514329144584320032, guid: 8b2afc1589da9af4d899bdc5960b98be, type: 3}
+  - {fileID: 7514329144584320032, guid: 6d81e922751e4784a8d7ef531f55e42a, type: 3}
+  - {fileID: 7514329144584320032, guid: 27e82c3512ec20745893d3d93e15c904, type: 3}
   NumberOfTrials: 60
-  startTouchingDuration: 3
+  startTouchingDuration: 2
   targetTouchDuration: 1
   restDuration: 7
   targetPositions:

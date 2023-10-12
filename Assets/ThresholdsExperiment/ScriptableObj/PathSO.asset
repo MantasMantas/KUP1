@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaeefad5e6a2d74980e44758607121e, type: 3}
   m_Name: PathSO
   m_EditorClassIdentifier: 
-  BezierPoints: {fileID: 7514329144584320032, guid: 6d81e922751e4784a8d7ef531f55e42a, type: 3}
+  paths:
+  - {fileID: 7514329144584320032, guid: 8b2afc1589da9af4d899bdc5960b98be, type: 3}
+  - {fileID: 7514329144584320032, guid: 6d81e922751e4784a8d7ef531f55e42a, type: 3}
+  - {fileID: 7514329144584320032, guid: 27e82c3512ec20745893d3d93e15c904, type: 3}
+  experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   DisplayPath: 1
