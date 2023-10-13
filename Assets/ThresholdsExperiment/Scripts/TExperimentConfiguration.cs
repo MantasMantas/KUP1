@@ -6,15 +6,23 @@ using UnityEngine;
 public class TExperimentConfiguration : ScriptableObject
 {
     public PathShapes pathShapes;
-    public int NumberOfTrials = 10;
+    public int NumberOfRepetions = 2;
 
     public float startTouchingDuration, targetTouchDuration, restDuration;
 
-    public float[] targetPositions = { 1f, .8f, 0.6f, 0.4f, 0.2f, 0f };
-    public float[] gains = { 2f, 1.75f, 1.5f, 1.25f, 1f, -1.25f, -1.5f, -1.75f, -2f };
+    public float targetCenterLeft, targetCenterRight;
+    public float targetDisplacementMagnitude;
+
+    public float maxGain = 1.5f, stepGain = 0.1f;
 
     public Gvalues gvalue;
 
+    public float[] Gains;
+    
+    private void OnValidate()
+    {
+        MakeGainsArray();
+    }
 
     public float GetGvalue() 
     {
@@ -99,6 +107,34 @@ public class TExperimentConfiguration : ScriptableObject
         }
 
         return volumeValue;
+    }
+
+    private void MakeGainsArray()
+    {
+        int arraySize = (int)((((maxGain - 1) / stepGain) + 1) * 2);
+        Gains = new float[arraySize];
+        Debug.Log(arraySize);
+
+        int midllePoint = arraySize / 2;
+
+        for (int i = 1; i < arraySize; i++)
+        {
+            /*if(i == 0) 
+            {
+                Gains[i] = 1;
+            }
+            else if (i < midllePoint)
+            {
+                Gains[i] = (1 + (stepGain * i)) * -1;
+            }
+            else if (i > midllePoint)
+            {
+                Gains[i] = 1 + (stepGain * i);
+            }*/
+
+            Gains[i] = 1 + (i * stepGain);
+        }
+
     }
 
 }
