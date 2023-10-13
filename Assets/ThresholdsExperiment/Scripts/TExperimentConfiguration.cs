@@ -17,7 +17,7 @@ public class TExperimentConfiguration : ScriptableObject
 
     public Gvalues gvalue;
 
-    public float[] Gains;
+    private float[] Gains;
     
     private void OnValidate()
     {
@@ -113,26 +113,22 @@ public class TExperimentConfiguration : ScriptableObject
     {
         int arraySize = (int)((((maxGain - 1) / stepGain) + 1) * 2);
         Gains = new float[arraySize];
-        Debug.Log(arraySize);
+        //Debug.Log(arraySize);
 
         int midllePoint = arraySize / 2;
 
-        for (int i = 1; i < arraySize; i++)
+        for (int i = 0; i < arraySize; i++)
         {
-            /*if(i == 0) 
+            float value = 1 + (i * stepGain);
+            if(i <= midllePoint) 
             {
-                Gains[i] = 1;
+                Gains[i] = value;
             }
-            else if (i < midllePoint)
+            if(i > midllePoint) 
             {
-                Gains[i] = (1 + (stepGain * i)) * -1;
+                Gains[i] = (maxGain - value) + -1;
             }
-            else if (i > midllePoint)
-            {
-                Gains[i] = 1 + (stepGain * i);
-            }*/
-
-            Gains[i] = 1 + (i * stepGain);
+            
         }
 
     }
