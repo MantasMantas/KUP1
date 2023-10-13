@@ -89,4 +89,11 @@ public class PathSO : ScriptableObject
     }
 }
 
+public enum PathShapes
+{
+    Horizontal,
+    Vertical,
+    Reaching
+}
+
 
