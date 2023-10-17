@@ -853,7 +853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHand: {fileID: 906872084}
-  movementThreshold: 0.1
+  movementThreshold: 0.01
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
   HandStopEvent: {fileID: 11400000, guid: ebbb0b682176a6d4cbca51688fc66945, type: 2}
 --- !u!114 &1187798131

@@ -23,7 +23,7 @@ public class HandManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isVibrationEnabled) 
+        if (!isVibrationEnabled) 
         {
             return;
         }
