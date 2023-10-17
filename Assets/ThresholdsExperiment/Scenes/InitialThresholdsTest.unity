@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 731079499}
   - component: {fileID: 731079502}
   - component: {fileID: 731079501}
+  - component: {fileID: 731079503}
   m_Layer: 0
   m_Name: VibrationManager
   m_TagString: Untagged
@@ -535,6 +536,34 @@ MonoBehaviour:
       - m_Target: {fileID: 731079500}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &731079503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731079497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a636b3ecd734843afae120a5bdb8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voidEvent: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
+  OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 731079500}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Stop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -853,9 +882,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHand: {fileID: 906872084}
-  movementThreshold: 0.01
+  movementThreshold: 0.002
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
   HandStopEvent: {fileID: 11400000, guid: ebbb0b682176a6d4cbca51688fc66945, type: 2}
+  bufferSize: 10
 --- !u!114 &1187798131
 MonoBehaviour:
   m_ObjectHideFlags: 0

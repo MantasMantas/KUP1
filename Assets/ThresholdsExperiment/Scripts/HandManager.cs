@@ -13,6 +13,12 @@ public class HandManager : MonoBehaviour
 
     private Vector3 CurrentHandPosition, PreviousHandPosition;
     private bool isMoving, isVibrationEnabled;
+
+    // filtering stuff
+    private Queue<Vector3> positions = new Queue<Vector3>();
+    public int bufferSize = 5;
+    private Vector3 smoothedPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,35 +29,58 @@ public class HandManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isVibrationEnabled) 
+        if (!isVibrationEnabled)
         {
             return;
         }
 
-        CurrentHandPosition = rightHand.transform.position;
+        UpdatePosition(rightHand.transform.position);
+        CheckMovement();
+        
 
-        if(Vector3.Distance(CurrentHandPosition, PreviousHandPosition) > movementThreshold) 
+    }
+
+
+    private void CheckMovement() 
+    {
+        if (Vector3.Distance(smoothedPosition, PreviousHandPosition) > movementThreshold)
         {
 
-            if (!isMoving) 
+            if (!isMoving)
             {
                 isMoving = true;
                 HandMovementEvent.raiseEvent();
             }
-            
 
-            PreviousHandPosition = CurrentHandPosition;
+
+            PreviousHandPosition = smoothedPosition;
         }
-        else 
+        else
         {
-          if(isMoving) 
-          {
-            isMoving = false;
-            HandStopEvent.raiseEvent();
-                
-          }
+            if (isMoving)
+            {
+                isMoving = false;
+                HandStopEvent.raiseEvent();
+
+            }
+        }
+    }
+    private void UpdatePosition(Vector3 newPosition) 
+    {
+        if (positions.Count >= bufferSize)
+        {
+            positions.Dequeue();
         }
 
+        positions.Enqueue(newPosition);
+
+        smoothedPosition = Vector3.zero;
+        foreach(var position in positions) 
+        {
+            smoothedPosition += position;
+        }
+
+        smoothedPosition /= positions.Count;
     }
 
     public void EnableVibration() 
