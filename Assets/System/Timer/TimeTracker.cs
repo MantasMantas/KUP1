@@ -8,10 +8,6 @@ public class TimeTracker : MonoBehaviour
     private float timeCount;
     private bool isCounting;
 
-    // external dependencies
-    public VoidEvent StopTimeTracking;
-
-
     // every frame run the timer if it is initiated otherwise check to see if it needs to count
     void Update()
     {
