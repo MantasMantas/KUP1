@@ -882,10 +882,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHand: {fileID: 906872084}
-  movementThreshold: 0.002
+  distanceThreshold: 0.007
+  experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
-  HandStopEvent: {fileID: 11400000, guid: ebbb0b682176a6d4cbca51688fc66945, type: 2}
-  bufferSize: 10
 --- !u!114 &1187798131
 MonoBehaviour:
   m_ObjectHideFlags: 0
