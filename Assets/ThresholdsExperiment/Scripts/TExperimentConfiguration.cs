@@ -16,7 +16,7 @@ public class TExperimentConfiguration : ScriptableObject
     public float targetCenterLeft, targetCenterRight;
     public float targetDisplacementMagnitude;
 
-    public float minGain = -1.5f ,maxGain = 1.5f, stepGain = 0.1f;
+    public float maxGain = 1.5f, stepGain = 0.1f;
     public Gvalues gvalue;
 
     // gain stuff
@@ -29,6 +29,8 @@ public class TExperimentConfiguration : ScriptableObject
     {
         MakeGainsArray();
         MakeTrialsArray();
+        RandomizeTrialsArray();
+        PrintTrialsArray();
         //Trial trial = new Trial(true, 0.8f, 1f);
 
         //Debug.Log("vibration: " + trial.GetVib() + " direction: " + trial.GetDir() + " gain:" + trial.GetG());
@@ -37,21 +39,24 @@ public class TExperimentConfiguration : ScriptableObject
 
     private void MakeGainsArray()
     {
-        int arraySize = (int)((((maxGain - minGain) / stepGain) + 1) * 2);
+        int arraySize = (int)((((maxGain - 1) / stepGain) + 1) * 2);
         Gains = new float[arraySize];
 
         int midllePoint = arraySize / 2;
 
         for (int i = 0; i < arraySize; i++)
         {
-            float value = 1 + (i * stepGain);
-            if (i <= midllePoint)
+            if (i < midllePoint)
             {
-                Gains[i] = value;
+                Gains[i] = (maxGain - (i * stepGain)) * -1;
+            }
+            if(i == midllePoint) 
+            {
+                Gains[i] = 1;
             }
             if (i > midllePoint)
             {
-                Gains[i] = (maxGain - value) + -1;
+                Gains[i] = (1 + ((i - midllePoint) * stepGain));
             }
 
         }
@@ -78,8 +83,6 @@ public class TExperimentConfiguration : ScriptableObject
                         float dir = Random.Range(currentDir - targetDisplacementMagnitude, currentDir + targetDisplacementMagnitude);
                         trials[trialIndex] = new Trial(vib, dir, Gains[g]);
 
-                        Debug.Log(trials[trialIndex].GetVib() + " " + trials[trialIndex].GetDir() + " " + trials[trialIndex].GetG());
-
                         trialIndex++;  // Increment the trial index for the next combination
                     }
                 }
@@ -87,13 +90,17 @@ public class TExperimentConfiguration : ScriptableObject
         }
     }
 
-
-
-
-
     private void RandomizeTrialsArray()
     {
         Randomizer.Shuffle(trials);
+    }
+
+    private void PrintTrialsArray() 
+    {
+        for(int i = 0; i < trials.Length; i++) 
+        {
+            Debug.Log(trials[i].GetVib() + " " + trials[i].GetDir() + " " + trials[i].GetG());
+        }
     }
     public Trial GetCurrentConfig()
     {
