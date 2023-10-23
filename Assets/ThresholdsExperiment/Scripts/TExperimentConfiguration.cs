@@ -92,14 +92,14 @@ public class TExperimentConfiguration : ScriptableObject
 
     private void RandomizeTrialsArray()
     {
-        Randomizer.Shuffle(trials);
+        Randomizer.ShuffleTrials(trials);
     }
 
     private void PrintTrialsArray() 
     {
         for(int i = 0; i < trials.Length; i++) 
         {
-            Debug.Log(trials[i].GetVib() + " " + trials[i].GetDir() + " " + trials[i].GetG());
+            Debug.Log(trials[i].GetVib() + " " + trials[i].GetDir() + " " + trials[i].GetG() + " vibration setting: " + trials[i].GetVibrationSetting());
         }
     }
     public Trial GetCurrentConfig()
