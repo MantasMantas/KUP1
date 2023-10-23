@@ -6,18 +6,12 @@ public class TargetManager : MonoBehaviour
 {
     public Transform target;
     public PathSO path;
-    // Start is called before the first frame update
-
-
-    private void Start()
-    {
-  
-    }
-
+    public TExperimentConfiguration experimentalConfig;
 
     public void TargetPlacement() 
     {
-        target.position = path.GetPointInPath(Random.Range(0f,1f));
+        float targetPos = experimentalConfig.GetCurrentConfig().GetDir();
+        target.position = path.GetPointInPath(targetPos);
     }
 
 }

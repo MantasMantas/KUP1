@@ -29,12 +29,6 @@ public class TExperimentConfiguration : ScriptableObject
     {
         MakeGainsArray();
         MakeTrialsArray();
-        RandomizeTrialsArray();
-        PrintTrialsArray();
-        //Trial trial = new Trial(true, 0.8f, 1f);
-
-        //Debug.Log("vibration: " + trial.GetVib() + " direction: " + trial.GetDir() + " gain:" + trial.GetG());
-        //Debug.Log(GValuesUtil.GetGValue(gvalue));
     }
 
     private void MakeGainsArray()
@@ -105,6 +99,24 @@ public class TExperimentConfiguration : ScriptableObject
     public Trial GetCurrentConfig()
     {
         return trials[trialIndex];
+    }
+
+    public void RandomizedTrials() 
+    {
+        RandomizeTrialsArray();
+        PrintTrialsArray();
+    }
+
+    public void IncrementTrialIndex() 
+    {
+        if(trials.Length >= trialIndex) 
+        {
+            Debug.Log("All trials have been run!");
+            // send some event to notify the system to stop the experimental block
+            return;
+        }
+        
+        trialIndex++;
     }
 }
 
