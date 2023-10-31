@@ -10,6 +10,7 @@ public class HandManager : MonoBehaviour
     public float distanceThreshold;
     public TExperimentConfiguration experimentalConfig;
     public VoidEvent HandMovementEvent;
+    public Flag pinchFlag;
 
     private Vector3 StartingHandPosition, CurrentHandPosition;
     private bool isVibrationStarted, isVibrationEnabled;
@@ -24,24 +25,17 @@ public class HandManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isVibrationEnabled || isVibrationStarted)
+        VibrationUpdate();
 
+        if(rightHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.5f) 
         {
-            return;
-        }
-
-
-        if(Vector3.Distance(StartingHandPosition, CurrentHandPosition) >= distanceThreshold) 
-        {
-            isVibrationStarted = true;
-            HandMovementEvent.raiseEvent();
+            //Debug.Log("Right Hand is pinching!");
+            pinchFlag.EnableFlag();
         }
         else 
         {
-            CurrentHandPosition = rightHand.transform.position;
+            pinchFlag.DisableFlag();
         }
-        
-
     }
 
 
@@ -56,6 +50,26 @@ public class HandManager : MonoBehaviour
     {
         isVibrationEnabled = false;
         isVibrationStarted = false;
+    }
+
+    private void VibrationUpdate() 
+    {
+        if (!isVibrationEnabled || isVibrationStarted)
+
+        {
+            return;
+        }
+
+
+        if (Vector3.Distance(StartingHandPosition, CurrentHandPosition) >= distanceThreshold)
+        {
+            isVibrationStarted = true;
+            HandMovementEvent.raiseEvent();
+        }
+        else
+        {
+            CurrentHandPosition = rightHand.transform.position;
+        }
     }
 
    

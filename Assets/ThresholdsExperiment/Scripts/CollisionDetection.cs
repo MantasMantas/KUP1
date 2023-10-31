@@ -9,6 +9,8 @@ public class CollisionDetection : MonoBehaviour
     public VoidEvent EventToCall;
     public TExperimentConfiguration experimentConfig;
 
+    public Flag pinchFlag;
+
     private Renderer renderer;
     private bool counting;
     private float counter, threshold;
@@ -44,7 +46,7 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (!counting) 
         {
@@ -53,9 +55,9 @@ public class CollisionDetection : MonoBehaviour
         }
        
         AssignMaterial(materials.GetTouching());
-    }
+    }*/
 
-    private void OnTriggerExit(Collider other)
+   /* private void OnTriggerExit(Collider other)
     {
         if (counting) 
         {
@@ -65,7 +67,7 @@ public class CollisionDetection : MonoBehaviour
         
         AssignMaterial(materials.GetDefault());
     }
-
+   */
     public void FocusOnMaterial() 
     {
         AssignMaterial(materials.GetFocusOn());
@@ -81,5 +83,18 @@ public class CollisionDetection : MonoBehaviour
         {
             Debug.LogWarning("The renderer was not assigned at object: " + this.name);
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(this.name == "StartArea") 
+        {
+            if (pinchFlag.GetFlag())
+            {
+                transform.position = other.transform.position;
+
+            }
+        }
+        
     }
 }

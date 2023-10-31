@@ -192,11 +192,6 @@ Transform:
   - {fileID: 1770772493}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &396998140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1870938896605422, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
-  m_PrefabInstance: {fileID: 906872082}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &558203274
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,13 +684,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4453513310108136, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1805796022}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1870938896605422, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 906872091}
-    - targetCorrespondingSourceObject: {fileID: 1870938896605422, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 906872090}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
 --- !u!4 &906872083 stripped
 Transform:
@@ -707,61 +696,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114428879332287356, guid: 835e735ca71bf78459fb2cababd74112, type: 3}
   m_PrefabInstance: {fileID: 906872082}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396998140}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb7623a8f0b49cf4dbaa40aea4d4be64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &906872090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396998140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd425c2d06f39bf4899d07c05d0f10eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabBegin: 0.55
-  grabEnd: 0.35
-  m_parentHeldObject: 1
-  m_moveHandPosition: 0
-  m_gripTransform: {fileID: 1857030528}
-  m_grabVolumes:
-  - {fileID: 0}
-  m_controller: 96
-  m_parentTransform: {fileID: 0}
-  m_player: {fileID: 0}
---- !u!54 &906872091
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396998140}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &942891601
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +890,7 @@ MonoBehaviour:
   distanceThreshold: 0.007
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
+  pinchFlag: {fileID: 11400000, guid: 0dd9cbb7adb6af843a21227e2bae5584, type: 2}
 --- !u!114 &1187798131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,6 +1640,7 @@ MonoBehaviour:
   materials: {fileID: 11400000, guid: 09e9cad85aedecf489c4d973c1c7f4dd, type: 2}
   EventToCall: {fileID: 11400000, guid: c6c0661c57cfda345b6a881f52110835, type: 2}
   experimentConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
+  pinchFlag: {fileID: 11400000, guid: 0dd9cbb7adb6af843a21227e2bae5584, type: 2}
 --- !u!54 &1858389578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1805,7 +1747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1956126578
 Transform:
   m_ObjectHideFlags: 0
@@ -1956,6 +1898,7 @@ MonoBehaviour:
   materials: {fileID: 11400000, guid: 09e9cad85aedecf489c4d973c1c7f4dd, type: 2}
   EventToCall: {fileID: 11400000, guid: 32f280e153549dd4881fb82d9ac2906e, type: 2}
   experimentConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
+  pinchFlag: {fileID: 0}
 --- !u!54 &2059838998
 Rigidbody:
   m_ObjectHideFlags: 0
