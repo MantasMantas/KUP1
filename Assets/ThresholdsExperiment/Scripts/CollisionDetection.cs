@@ -46,7 +46,7 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!counting) 
         {
@@ -55,9 +55,9 @@ public class CollisionDetection : MonoBehaviour
         }
        
         AssignMaterial(materials.GetTouching());
-    }*/
+    }
 
-   /* private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (counting) 
         {
@@ -67,7 +67,7 @@ public class CollisionDetection : MonoBehaviour
         
         AssignMaterial(materials.GetDefault());
     }
-   */
+   
     public void FocusOnMaterial() 
     {
         AssignMaterial(materials.GetFocusOn());
