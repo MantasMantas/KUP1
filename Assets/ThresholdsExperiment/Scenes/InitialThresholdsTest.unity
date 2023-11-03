@@ -887,10 +887,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHand: {fileID: 906872084}
+  rightHandT: {fileID: 0}
   distanceThreshold: 0.007
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
   pinchFlag: {fileID: 11400000, guid: 0dd9cbb7adb6af843a21227e2bae5584, type: 2}
+  path: {fileID: 0}
 --- !u!114 &1187798131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1747,7 +1749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1956126578
 Transform:
   m_ObjectHideFlags: 0

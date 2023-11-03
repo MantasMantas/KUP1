@@ -7,10 +7,12 @@ using UnityEngine;
 public class HandManager : MonoBehaviour
 {
     public OVRHand rightHand;
+    public Transform rightHandT;
     public float distanceThreshold;
     public TExperimentConfiguration experimentalConfig;
     public VoidEvent HandMovementEvent;
     public Flag pinchFlag;
+    public PathSO path;
 
     private Vector3 StartingHandPosition, CurrentHandPosition;
     private bool isVibrationStarted, isVibrationEnabled;
@@ -27,15 +29,7 @@ public class HandManager : MonoBehaviour
     {
         VibrationUpdate();
 
-        if(rightHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.5f) 
-        {
-            //Debug.Log("Right Hand is pinching!");
-            pinchFlag.EnableFlag();
-        }
-        else 
-        {
-            pinchFlag.DisableFlag();
-        }
+        
     }
 
 
@@ -71,6 +65,25 @@ public class HandManager : MonoBehaviour
             CurrentHandPosition = rightHand.transform.position;
         }
     }
+    private void PinchUpdate() 
+    {
+        if (rightHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.5f)
+        {
+            //Debug.Log("Right Hand is pinching!");
+            pinchFlag.EnableFlag();
+        }
+        else
+        {
+            pinchFlag.DisableFlag();
+        }
+    }
+    private void GainUpdate() 
+    {
+        Vector3 CurrentPos = path.GetClosestPointToPath(rightHandT.position);
+        Vector3 TargetPos = path.GetPointInPath(experimentalConfig.GetCurrentTarget());
+        float CurrentGain = experimentalConfig.GetCurrentGain();
 
+
+    }
    
 }

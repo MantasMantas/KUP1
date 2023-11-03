@@ -85,7 +85,7 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+   /* private void OnTriggerStay(Collider other)
     {
         if(this.name == "StartArea") 
         {
@@ -96,5 +96,5 @@ public class CollisionDetection : MonoBehaviour
             }
         }
         
-    }
+    }*/
 }

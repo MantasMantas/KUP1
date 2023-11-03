@@ -100,6 +100,20 @@ public class TExperimentConfiguration : ScriptableObject
     {
         return trials[trialIndex];
     }
+    public float GetCurrentGain() 
+    {
+        return trials[trialIndex].GetG();
+    }
+
+    public int GetCurrentVibration() 
+    {
+        return trials[trialIndex].GetVibrationSetting();
+    }
+
+    public float GetCurrentTarget() 
+    {
+        return trials[trialIndex].GetDir();
+    }
 
     public void RandomizedTrials() 
     {
