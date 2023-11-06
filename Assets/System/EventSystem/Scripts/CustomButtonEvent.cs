@@ -19,8 +19,12 @@ public class CustomButtonEvent : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        GameObject parentObject = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
         
-       downEvent?.Invoke();
+        if (parentObject.tag == "LeftHand") 
+        {
+            downEvent?.Invoke();
+        }
         
     }
 

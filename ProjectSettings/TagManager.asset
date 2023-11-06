@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - RightController
+  - RightHand
+  - LeftHand
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - Water
   - UI
   - EyeTracking
-  - OVR
-  - LeftHand
+  - 
+  - 
   - 
   - 
   - 
