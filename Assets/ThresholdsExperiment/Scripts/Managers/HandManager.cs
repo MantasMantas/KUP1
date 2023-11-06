@@ -16,6 +16,7 @@ public class HandManager : MonoBehaviour
 
     private Vector3 StartingHandPosition, CurrentHandPosition;
     private bool isVibrationStarted, isVibrationEnabled;
+    private bool pinchDetect;
 
 
     // Start is called before the first frame update
@@ -28,8 +29,8 @@ public class HandManager : MonoBehaviour
     void Update()
     {
         VibrationUpdate();
-
-        
+        GainUpdate();
+        PinchUpdate();
     }
 
 
@@ -44,6 +45,16 @@ public class HandManager : MonoBehaviour
     {
         isVibrationEnabled = false;
         isVibrationStarted = false;
+    }
+
+    public void EnablePinchDetect() 
+    {
+        pinchDetect = true;
+    }
+
+    public void DisablePinchDetect() 
+    {
+        pinchDetect = false;
     }
 
     private void VibrationUpdate() 
@@ -67,6 +78,11 @@ public class HandManager : MonoBehaviour
     }
     private void PinchUpdate() 
     {
+        if (!pinchDetect)
+        {
+            return;
+        }
+
         if (rightHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.5f)
         {
             //Debug.Log("Right Hand is pinching!");
@@ -79,9 +95,18 @@ public class HandManager : MonoBehaviour
     }
     private void GainUpdate() 
     {
-        Vector3 CurrentPos = path.GetClosestPointToPath(rightHandT.position);
-        Vector3 TargetPos = path.GetPointInPath(experimentalConfig.GetCurrentTarget());
         float CurrentGain = experimentalConfig.GetCurrentGain();
+
+        if(CurrentGain == 1) 
+        {
+            Debug.Log("There is no gain in this trial!");
+            return;
+        }
+
+        //Debug.Log("Should be a gain of:" + CurrentGain);
+
+        //Vector3 CurrentPos = path.GetClosestPointToPath(rightHandT.position);
+        //Vector3 TargetPos = path.GetPointInPath(experimentalConfig.GetCurrentTarget());
 
 
     }

@@ -10,7 +10,7 @@ public class TargetManager : MonoBehaviour
 
     public void TargetPlacement() 
     {
-        float targetPos = experimentalConfig.GetCurrentConfig().GetDir();
+        float targetPos = experimentalConfig.GetCurrentTarget();
         target.position = path.GetPointInPath(targetPos);
     }
 

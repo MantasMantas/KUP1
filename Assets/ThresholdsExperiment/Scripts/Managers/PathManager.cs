@@ -18,18 +18,27 @@ public class PathManager : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        //lineRenderer.enabled = false;
         ConfigurePath();
     }
 
     public void ConfigurePath() 
     {
-        lineRenderer.enabled = true;
+        LineVisible();
         path.InitializePath(OriginPoint, lineRenderer);
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = lineWidth;
         StartArea = OriginPoint.GetChild(0).GetComponent<Transform>();
         StartArea.position = path.GetPointInPath(0.5f);
+    }
+
+    public void LineVisible() 
+    {
+        lineRenderer.enabled = true;
+    }
+
+    public void LineInvisible()
+    {
+        lineRenderer.enabled = false;
     }
 
 }
