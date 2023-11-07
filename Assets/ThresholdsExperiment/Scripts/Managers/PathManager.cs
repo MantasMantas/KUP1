@@ -24,11 +24,12 @@ public class PathManager : MonoBehaviour
     public void ConfigurePath() 
     {
         LineVisible();
-        path.InitializePath(OriginPoint, lineRenderer);
+        GameObject copyOfOrigin = CopyOfComponenet.MakeTCopy(OriginPoint);
+        path.InitializePath(copyOfOrigin.transform, lineRenderer);
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = lineWidth;
-        StartArea = OriginPoint.GetChild(0).GetComponent<Transform>();
-        StartArea.position = path.GetPointInPath(0.5f);
+        
+        //OriginPoint.position = path.GetPointInPath(0.5f);
     }
 
     public void LineVisible() 

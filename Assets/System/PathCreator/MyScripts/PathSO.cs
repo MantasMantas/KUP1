@@ -66,7 +66,7 @@ public class PathSO : ScriptableObject
         pointTransforms = pointTransforms.Where((item, index) => index != 0).ToArray();
 
         BezierPath bezierPath = new BezierPath(pointTransforms, false, PathSpace.xyz);
-
+        originPoint.position = originPoint.position - pointTransforms[1].position; 
         VertexPath vertexPath = new VertexPath(bezierPath, originPoint);
 
         if (DisplayPath) 
