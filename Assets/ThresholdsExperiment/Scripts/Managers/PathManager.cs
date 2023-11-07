@@ -18,7 +18,7 @@ public class PathManager : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        ConfigurePath();
+        //ConfigurePath();
     }
 
     public void ConfigurePath() 

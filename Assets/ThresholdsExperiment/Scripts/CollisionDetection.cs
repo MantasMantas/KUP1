@@ -9,8 +9,6 @@ public class CollisionDetection : MonoBehaviour
     public VoidEvent EventToCall;
     public TExperimentConfiguration experimentConfig;
 
-    public Flag pinchFlag;
-
     private Renderer renderer;
     private bool counting;
     private float counter, threshold;
@@ -88,16 +86,5 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-   /* private void OnTriggerStay(Collider other)
-    {
-        if(this.name == "StartArea") 
-        {
-            if (pinchFlag.GetFlag())
-            {
-                transform.position = other.transform.position;
-
-            }
-        }
-        
-    }*/
+   
 }
