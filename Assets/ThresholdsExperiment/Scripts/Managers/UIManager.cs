@@ -31,6 +31,6 @@ public class UIManager : MonoBehaviour
     private void SceenFollowStart() 
     {
         if (!followStart) { return; }
-        screen.position = posSocket.position;  
+        screen.position = posSocket.position;
     }
 }

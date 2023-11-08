@@ -26,6 +26,7 @@ public class PathManager : MonoBehaviour
         LineVisible();
         GameObject copyOfOrigin = CopyOfComponenet.MakeTCopy(OriginPoint);
         path.InitializePath(copyOfOrigin.transform, lineRenderer);
+        Destroy(copyOfOrigin);
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = lineWidth;
         

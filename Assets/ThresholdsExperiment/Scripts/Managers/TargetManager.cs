@@ -8,6 +8,10 @@ public class TargetManager : MonoBehaviour
     public PathSO path;
     public TExperimentConfiguration experimentalConfig;
 
+    private void Start()
+    {
+        
+    }
     public void TargetPlacement() 
     {
         float targetPos = experimentalConfig.GetCurrentTarget();

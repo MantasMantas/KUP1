@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ea0762e5d2b5c47a7f53f14473019f, type: 3}
   m_Name: T experiment config
   m_EditorClassIdentifier: 
-  pathShapes: 0
+  pathShapes: 1
   NumberOfRepetions: 2
   startTouchingDuration: 1
   targetTouchDuration: 0.5
