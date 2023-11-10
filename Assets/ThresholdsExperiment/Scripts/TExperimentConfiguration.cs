@@ -96,6 +96,19 @@ public class TExperimentConfiguration : ScriptableObject
             Debug.Log(trials[i].GetVib() + " " + trials[i].GetDir() + " " + trials[i].GetG() + " vibration setting: " + trials[i].GetVibrationSetting());
         }
     }
+    public int IncreamentIndex() 
+    {
+        if(trialIndex > trials.Length) 
+        {
+            return 0;
+        }
+
+        return ++trialIndex;
+    }
+    public void ResetIndex() 
+    {
+        trialIndex = 1;
+    }
     public Trial GetCurrentConfig()
     {
         return trials[trialIndex];

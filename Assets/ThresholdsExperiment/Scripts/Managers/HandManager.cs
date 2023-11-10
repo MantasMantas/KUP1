@@ -99,7 +99,6 @@ public class HandManager : MonoBehaviour
 
         if(CurrentGain == 1) 
         {
-            //Debug.Log("There is no gain in this trial!");
             return;
         }
 
