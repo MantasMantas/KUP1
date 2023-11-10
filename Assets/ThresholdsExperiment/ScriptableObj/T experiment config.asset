@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathShapes: 1
   NumberOfRepetions: 2
-  startTouchingDuration: 1
-  targetTouchDuration: 0.5
+  startTouchingDuration: 0.5
+  targetTouchDuration: 0.2
   restDuration: 6
   targetCenterLeft: 0.2
   targetCenterRight: 0.8

@@ -145,6 +145,10 @@ public class TExperimentConfiguration : ScriptableObject
         
         trialIndex++;
     }
+    public float GetGvalue() 
+    {
+        return GValuesUtil.GetGValue(gvalue);
+    }
 }
 
 
