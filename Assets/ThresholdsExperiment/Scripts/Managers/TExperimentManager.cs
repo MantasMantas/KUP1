@@ -27,7 +27,7 @@ public class TExperimentManager : MonoBehaviour
         
     }
 
-    public void TargetEvent() 
+    public void StartRestCounter() 
     {
         TimerStart.raiseEvent(experimentConfig.restDuration);
     }
