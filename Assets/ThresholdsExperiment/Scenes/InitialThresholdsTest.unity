@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 2960498}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -2.3699996, y: 0, z: -1.3500004}
+  m_LocalPosition: {x: -2.3699996, y: 0, z: -3.6200023}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -436,7 +436,7 @@ Transform:
   m_GameObject: {fileID: 436644069}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -3.37, y: 0, z: -1.35}
+  m_LocalPosition: {x: -3.37, y: 0, z: -3.62}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -583,7 +583,7 @@ Transform:
   m_GameObject: {fileID: 446413006}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 1.6300004, y: 0, z: -1.3500004}
+  m_LocalPosition: {x: 1.6300004, y: 0, z: -3.6200023}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1348,7 +1348,7 @@ Transform:
   m_GameObject: {fileID: 911540810}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0.08, y: 0, z: -0.41}
+  m_LocalPosition: {x: 0.08, y: 0, z: 1.65}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1363,7 +1363,7 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911540810}
   m_Text: "Rest your right hand!\nHow much did you \nfeel the vitual hand was\nyour
-    own? \n\n\n\n1 - not at all\n7 - Felt like my real hand"
+    own? \n1 - not at all\n7 - Felt like my real hand"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1766,7 +1766,7 @@ Transform:
   m_GameObject: {fileID: 1140921204}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -0.3699997, y: 0, z: -1.3500004}
+  m_LocalPosition: {x: -0.3699997, y: 0, z: -3.6200023}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2033,8 +2033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851d7ec99173a53459ef355212f5cc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  righHandPos: {fileID: 558203275}
   rightHand: {fileID: 906872084}
-  rightHandT: {fileID: 0}
   distanceThreshold: 0.007
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
@@ -2068,6 +2068,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1187798130}
+        m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
+        m_MethodName: DisableGain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1187798132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2087,6 +2099,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1187798130}
         m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
         m_MethodName: EnableVibration
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1187798130}
+        m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
+        m_MethodName: EnableGain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2181,7 +2205,7 @@ Transform:
   m_GameObject: {fileID: 1203220866}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -1.3699996, y: 0, z: -1.3500004}
+  m_LocalPosition: {x: -1.3699996, y: 0, z: -3.6200023}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2324,7 +2348,7 @@ Transform:
   m_GameObject: {fileID: 1289846694}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2661,7 +2685,7 @@ Transform:
   m_GameObject: {fileID: 1524112695}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0.6300003, y: 0, z: -1.3500004}
+  m_LocalPosition: {x: 0.6300003, y: 0, z: -3.6200023}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3958,7 +3982,7 @@ Transform:
   m_GameObject: {fileID: 1896765289}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 2.6300004, y: 0, z: -1.3500004}
+  m_LocalPosition: {x: 2.6300004, y: 0, z: -3.6200023}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

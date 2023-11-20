@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class HandManager : MonoBehaviour
 {
+    public Transform righHandPos;
     public OVRHand rightHand;
-    public Transform rightHandT;
     public float distanceThreshold;
     public TExperimentConfiguration experimentalConfig;
     public VoidEvent HandMovementEvent;
     public Flag pinchFlag;
     public PathSO path;
 
+    public float gainStep = 0.01f;
+
     private Vector3 StartingHandPosition, CurrentHandPosition;
     private bool isVibrationStarted, isVibrationEnabled;
-    private bool pinchDetect;
+    private bool pinchDetect, gainEnabled;
 
 
     // Start is called before the first frame update
@@ -57,6 +59,16 @@ public class HandManager : MonoBehaviour
         pinchDetect = false;
     }
 
+    public void EnableGain() 
+    {
+        gainEnabled = true;
+    }
+
+    public void DisableGain() 
+    {
+        gainEnabled = false;
+    }
+
     private void VibrationUpdate() 
     {
         if (!isVibrationEnabled || isVibrationStarted)
@@ -95,18 +107,28 @@ public class HandManager : MonoBehaviour
     }
     private void GainUpdate() 
     {
+        // Checking if there is a gain to apply
         float CurrentGain = experimentalConfig.GetCurrentGain();
 
-        if(CurrentGain == 1) 
+        if(CurrentGain == 1 || !gainEnabled) 
         {
             return;
         }
 
-        //Debug.Log("Should be a gain of:" + CurrentGain);
+        // Fetching all the necessary variables for calculation
+        float targetPoint = experimentalConfig.GetCurrentTarget();
+        float currentPointOnPath = path.GetClosestCurveValue(righHandPos.position);
 
-        //Vector3 CurrentPos = path.GetClosestPointToPath(rightHandT.position);
-        //Vector3 TargetPos = path.GetPointInPath(experimentalConfig.GetCurrentTarget());
+        // calculating the normalized distance used for linear interpolation
+        float normalizedDistance = Mathf.InverseLerp(targetPoint, 0.5f, currentPointOnPath);
 
+        // calulating the gain based on current distance to target
+        float AppliedGain = Mathf.Lerp(1, CurrentGain, normalizedDistance);
+        float gainPointOnPath = AppliedGain * currentPointOnPath;
+
+        // applying the gain to the hand
+        rightHand.transform.position = path.GetPointInPath(gainPointOnPath);
+        //rightHand.transform.rotation = path.GetRotationInPath(gainPointOnPath);
 
     }
    
