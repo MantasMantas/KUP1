@@ -118,18 +118,34 @@ public class HandManager : MonoBehaviour
         // Fetching all the necessary variables for calculation
         float targetPoint = experimentalConfig.GetCurrentTarget();
         float currentPointOnPath = path.GetClosestCurveValue(righHandPos.position);
+        float normalizedDistance = 0f;
 
         // calculating the normalized distance used for linear interpolation
-        float normalizedDistance = Mathf.InverseLerp(targetPoint, 0.5f, currentPointOnPath);
+        if(targetPoint > 0.5f) 
+        {
+            normalizedDistance = Mathf.InverseLerp(0.5f, targetPoint, currentPointOnPath);
+        }
+        else 
+        {
+            normalizedDistance = Mathf.InverseLerp(targetPoint, 0.5f, currentPointOnPath);
+        }
+        
 
         // calulating the gain based on current distance to target
         float AppliedGain = Mathf.Lerp(1, CurrentGain, normalizedDistance);
+        Debug.Log("Applied gain: " + AppliedGain);
         float gainPointOnPath = AppliedGain * currentPointOnPath;
+        Debug.Log("Current point on path: " + currentPointOnPath + "New point on parth: " + gainPointOnPath);
 
         // applying the gain to the hand
-        rightHand.transform.position = path.GetPointInPath(gainPointOnPath);
+        Vector3 curveReference = path.GetPointInPath(gainPointOnPath);
+        //rightHand.transform.position = new Vector3(rightHand.transform.position.x, curveReference.y, curveReference.z);
+        rightHand.transform.position = new Vector3(curveReference.x, rightHand.transform.position.y, curveReference.z);
+        //rightHand.transform.position = new Vector3(curveReference.x, curveReference.y, rightHand.transform.position.z);
         //rightHand.transform.rotation = path.GetRotationInPath(gainPointOnPath);
 
     }
+
+
    
 }
