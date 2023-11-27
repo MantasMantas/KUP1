@@ -135,7 +135,7 @@ public class HandManager : MonoBehaviour
 
         rightHand.transform.position = path.GetPointInPath(deltaGain);
 
-        Debug.Log("Current point on path: " + currentPointOnPath + "Point on path with gain")
+        Debug.Log("Current point on path: " + currentPointOnPath + "Point on path with gain");
 
 
         /*float normalizedDistance = 0f;
