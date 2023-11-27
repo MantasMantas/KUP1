@@ -8,6 +8,7 @@ public class PathManager : MonoBehaviour
     public PathSO path;
     public Transform OriginPoint;
     public float lineWidth;
+    public VoidEvent pathConfigured;
 
     private Transform StartArea;
     private LineRenderer lineRenderer;
@@ -27,6 +28,7 @@ public class PathManager : MonoBehaviour
         path.InitializePath(copyOfOrigin.transform, lineRenderer);
         lineRenderer.startWidth = lineWidth;
         lineRenderer.endWidth = lineWidth;
+        pathConfigured.raiseEvent();
     }
 
     public void LineVisible() 

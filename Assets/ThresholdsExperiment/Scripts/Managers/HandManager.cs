@@ -20,14 +20,14 @@ public class HandManager : MonoBehaviour
     private bool isVibrationStarted, isVibrationEnabled;
     private bool pinchDetect, gainEnabled;
 
-    // Movement delta stuff
-    private Queue<float> positionBuffer = new Queue<float>();
+    private MovementDelta movementDelta;
     private int bufferSize = 5;
+    private Vector3 startingPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        InitializeBufer();
+        
     }
 
     // Update is called once per frame
@@ -36,6 +36,18 @@ public class HandManager : MonoBehaviour
         VibrationUpdate();
         GainUpdate();
         PinchUpdate();
+    }
+
+    public void ResetHandPosition() 
+    {
+        rightHand.transform.position = righHandPos.position;
+    }
+
+    public void SetUpBuffer() 
+    {
+        startingPosition = path.GetPointInPath(0.5f);
+        movementDelta = new MovementDelta(startingPosition, bufferSize);
+        movementDelta.InitializeBufer();
     }
 
 
@@ -118,76 +130,24 @@ public class HandManager : MonoBehaviour
             return;
         }
 
-        // Fetching all the necessary variables for calculation
-        // float targetPoint = experimentalConfig.GetCurrentTarget();
-        float currentPointOnPath = path.GetClosestCurveValue(righHandPos.position);
+        // Fetch the current hand position and update the buffer
+        Vector3 currentPosition = righHandPos.transform.position;
+        movementDelta.AddValue(currentPosition);
 
-        if (positionBuffer.Count >= bufferSize)
-        {
-            positionBuffer.Dequeue();
-        }
+        // Get the movement delta
+        Vector3 delta = movementDelta.CalculateAverageMovementDelta();
 
-        positionBuffer.Enqueue(currentPointOnPath);
+        // Apply the gain
+        Vector3 deltaGain = delta * currentGain;
 
-        float currentDelta = CalculateAverageMovementDelta();
+        // Apply the adjusted delta to the hand position
+        rightHand.transform.position += deltaGain;
 
-        float deltaGain = currentDelta * currentGain;
-
-        rightHand.transform.position = path.GetPointInPath(deltaGain);
-
-        Debug.Log("Current point on path: " + currentPointOnPath + "Point on path with gain");
-
-
-        /*float normalizedDistance = 0f;
-
-        // calculating the normalized distance used for linear interpolation
-        if(targetPoint > 0.5f) 
-        {
-            normalizedDistance = Mathf.InverseLerp(0.5f, targetPoint, currentPointOnPath);
-        }
-        else 
-        {
-            normalizedDistance = Mathf.InverseLerp(targetPoint, 0.5f, currentPointOnPath);
-        }
-        
-
-        // calulating the gain based on current distance to target
-        float AppliedGain = Mathf.Lerp(1, CurrentGain, normalizedDistance);
-        Debug.Log("Applied gain: " + AppliedGain);
-        float gainPointOnPath = AppliedGain * currentPointOnPath;
-        Debug.Log("Current point on path: " + currentPointOnPath + "New point on parth: " + gainPointOnPath);
-
-        // applying the gain to the hand
-        Vector3 curveReference = path.GetPointInPath(gainPointOnPath);
-        //rightHand.transform.position = new Vector3(rightHand.transform.position.x, curveReference.y, curveReference.z);
-        rightHand.transform.position = new Vector3(curveReference.x, rightHand.transform.position.y, curveReference.z);
-        //rightHand.transform.position = new Vector3(curveReference.x, curveReference.y, rightHand.transform.position.z);
-        //rightHand.transform.rotation = path.GetRotationInPath(gainPointOnPath);*/
 
     }
 
-    private void InitializeBufer() 
-    {
-        for (int i = 0; i < bufferSize; i++)
-        {
-            positionBuffer.Enqueue(path.GetClosestCurveValue(righHandPos.position));
-        }
-    }
 
-    private float CalculateAverageMovementDelta() 
-    {
-        float SumOfDeltas = 0f;
-        float previousPosition = positionBuffer.Peek();
 
-        foreach(var position in positionBuffer) 
-        {
-            float delta = position - previousPosition;
-            SumOfDeltas += delta;
-            previousPosition = position;
-        }
-
-        return SumOfDeltas / (positionBuffer.Count - 1);
-    }
 
 
 }
