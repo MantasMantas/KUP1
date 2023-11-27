@@ -130,10 +130,6 @@ public class HandManager : MonoBehaviour
             return;
         }
 
-        // Fetch the current hand position and update the buffer
-        Vector3 currentPosition = righHandPos.transform.position;
-        movementDelta.AddValue(currentPosition);
-
         // Get the movement delta
         Vector3 delta = movementDelta.CalculateAverageMovementDelta();
 
@@ -143,7 +139,7 @@ public class HandManager : MonoBehaviour
         // Apply the adjusted delta to the hand position
         rightHand.transform.position += deltaGain;
 
-
+        movementDelta.AddValue(righHandPos.transform.position);
     }
 
 
