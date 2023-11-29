@@ -2163,7 +2163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851d7ec99173a53459ef355212f5cc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  righHandPos: {fileID: 558203275}
+  rightHandPos: {fileID: 1857030528}
   rightHand: {fileID: 906872084}
   distanceThreshold: 0.007
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}

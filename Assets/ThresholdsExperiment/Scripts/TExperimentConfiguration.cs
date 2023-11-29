@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -16,7 +17,7 @@ public class TExperimentConfiguration : ScriptableObject
     public float targetCenterLeft, targetCenterRight;
     public float targetDisplacementMagnitude;
 
-    public float maxGain = 1.5f, stepGain = 0.1f;
+    public float maxGain = 1.5f, stepSize = 0.1f;
     public Gvalues gvalue;
 
     // gain stuff
@@ -33,7 +34,7 @@ public class TExperimentConfiguration : ScriptableObject
 
     private void MakeGainsArray()
     {
-        int arraySize = (int)((((maxGain - 1) / stepGain) + 1) * 2);
+        /*int arraySize = (int)((((maxGain - 1) / stepGain) + 1) * 2);
         Gains = new float[arraySize];
 
         int midllePoint = arraySize / 2;
@@ -53,6 +54,18 @@ public class TExperimentConfiguration : ScriptableObject
                 Gains[i] = (1 + ((i - midllePoint) * stepGain));
             }
 
+        }*/
+
+        float maxValue = maxGain;
+        float minValue = 2 - maxGain;
+
+        int arraySize = (int)Math.Ceiling((maxValue - minValue) / stepSize) + 1;
+
+        Gains = new float[arraySize];
+
+        for(int i = 0; i < arraySize; i++) 
+        {
+            Gains[i] = minValue + (stepSize * i);
         }
     }
 
@@ -74,7 +87,7 @@ public class TExperimentConfiguration : ScriptableObject
 
                     for (int g = 0; g < Gains.Length; g++)  // Loop for gain values
                     {
-                        float dir = Random.Range(currentDir - targetDisplacementMagnitude, currentDir + targetDisplacementMagnitude);
+                        float dir = UnityEngine.Random.Range(currentDir - targetDisplacementMagnitude, currentDir + targetDisplacementMagnitude);
                         trials[trialIndex] = new Trial(vib, dir, Gains[g]);
 
                         trialIndex++;  // Increment the trial index for the next combination

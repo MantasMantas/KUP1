@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HandManager : MonoBehaviour
 {
-    public Transform righHandPos;
+    public Transform rightHandPos;
     public OVRHand rightHand;
     public float distanceThreshold;
     public TExperimentConfiguration experimentalConfig;
@@ -22,7 +22,7 @@ public class HandManager : MonoBehaviour
 
     private MovementDelta movementDelta;
     private int bufferSize = 5;
-    private Vector3 startingPosition;
+    private Vector3 startingPosition, BaseOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,8 @@ public class HandManager : MonoBehaviour
 
     public void ResetHandPosition() 
     {
-        rightHand.transform.position = righHandPos.position;
+        rightHand.transform.position = rightHandPos.position;
+        BaseOffset= Vector3.zero;
     }
 
     public void SetUpBuffer() 
@@ -77,6 +78,7 @@ public class HandManager : MonoBehaviour
     public void EnableGain() 
     {
         gainEnabled = true;
+        StartingHandPosition = rightHand.transform.position;
     }
 
     public void DisableGain() 
@@ -130,17 +132,29 @@ public class HandManager : MonoBehaviour
             return;
         }
 
+        Vector3 currentHandPos = rightHandPos.position;
+
+        /*if(Vector3.Distance(StartingHandPosition, currentHandPos) < distanceThreshold) 
+        {
+            return; // don't apply any gain until the hand leaves the starting area
+        }*/
+
+        Debug.Log("Current gain: " + currentGain);
         // Get the movement delta
         Vector3 delta = movementDelta.CalculateAverageMovementDelta();
 
-        // Apply the gain
+        // Add the gain
         Vector3 deltaGain = delta * currentGain;
 
-        // Apply the adjusted delta to the hand position
-        rightHand.transform.position += deltaGain;
+        // Store the accumulated offset
+        BaseOffset += deltaGain;
 
-        movementDelta.AddValue(righHandPos.transform.position);
+        // Apply the adjusted delta to the hand position
+        rightHand.transform.position = currentHandPos + BaseOffset;
+
+        movementDelta.AddValue(currentHandPos);
     }
+
 
 
 

@@ -19,17 +19,17 @@ MonoBehaviour:
   restDuration: 6
   targetCenterLeft: 0.2
   targetCenterRight: 0.8
-  targetDisplacementMagnitude: 0.1
+  targetDisplacementMagnitude: 0
   maxGain: 1.4
-  stepGain: 0.1
+  stepSize: 0.1
   gvalue: 11
   Gains:
-  - -1.4
-  - -1.3
-  - -1.1999999
-  - -1.1
+  - 0.6
+  - 0.70000005
+  - 0.8
+  - 0.90000004
   - 1
   - 1.1
   - 1.2
-  - 1.3
-  - 1.4
+  - 1.3000001
+  - 1.4000001
