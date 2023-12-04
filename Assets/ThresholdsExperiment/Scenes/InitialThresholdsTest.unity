@@ -2164,6 +2164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHandPos: {fileID: 1857030528}
+  rightHandVirtual: {fileID: 906872083}
   rightHand: {fileID: 906872084}
   distanceThreshold: 0.007
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}

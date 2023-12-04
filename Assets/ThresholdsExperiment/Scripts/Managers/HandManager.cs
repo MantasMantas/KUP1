@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HandManager : MonoBehaviour
 {
-    public Transform rightHandPos;
+    public Transform rightHandPos, rightHandVirtual;
     public OVRHand rightHand;
     public float distanceThreshold;
     public TExperimentConfiguration experimentalConfig;
@@ -22,7 +22,7 @@ public class HandManager : MonoBehaviour
 
     private MovementDelta movementDelta;
     private int bufferSize = 5;
-    private Vector3 startingPosition, BaseOffset;
+    private Vector3 startingPosition, BaseOffset, previousHandPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -141,18 +141,23 @@ public class HandManager : MonoBehaviour
 
         Debug.Log("Current gain: " + currentGain);
         // Get the movement delta
-        Vector3 delta = movementDelta.CalculateAverageMovementDelta();
+        //Vector3 delta = movementDelta.CalculateAverageMovementDelta();
+
+        Vector3 delta = currentHandPos - previousHandPosition;
 
         // Add the gain
         Vector3 deltaGain = delta * currentGain;
 
         // Store the accumulated offset
-        BaseOffset += deltaGain;
+        //BaseOffset += deltaGain;
 
         // Apply the adjusted delta to the hand position
-        rightHand.transform.position = currentHandPos + BaseOffset;
+        // gain too small
+        // ovr hand transform maybe wrong instead use the gameobject transform
+        rightHandVirtual.position += deltaGain;
 
-        movementDelta.AddValue(currentHandPos);
+        //movementDelta.AddValue(currentHandPos);
+        previousHandPosition = currentHandPos;
     }
 
 
