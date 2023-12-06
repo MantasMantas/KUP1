@@ -6,23 +6,18 @@ using UnityEngine;
 
 public class HandManager : MonoBehaviour
 {
-    public Transform rightHandPos, rightHandVirtual;
-    public OVRHand rightHand;
+    public Transform realHand;
+    public OVRHand virtualHand;
     public float distanceThreshold;
     public TExperimentConfiguration experimentalConfig;
     public VoidEvent HandMovementEvent;
     public Flag pinchFlag;
     public PathSO path;
 
-    public float gainStep = 0.01f;
-
     private Vector3 StartingHandPosition, CurrentHandPosition;
     private bool isVibrationStarted, isVibrationEnabled;
     private bool pinchDetect, gainEnabled;
 
-    private MovementDelta movementDelta;
-    private int bufferSize = 5;
-    private Vector3 startingPosition, BaseOffset, previousHandPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -40,23 +35,12 @@ public class HandManager : MonoBehaviour
 
     public void ResetHandPosition() 
     {
-        rightHand.transform.position = rightHandPos.position;
-        BaseOffset= Vector3.zero;
+        virtualHand.transform.position = realHand.position;
     }
-
-    public void SetUpBuffer() 
-    {
-        startingPosition = path.GetPointInPath(0.5f);
-        movementDelta = new MovementDelta(startingPosition, bufferSize);
-        movementDelta.InitializeBufer();
-    }
-
 
     public void EnableVibration() 
     {
         isVibrationEnabled = true;
-        StartingHandPosition = rightHand.transform.position;
-        CurrentHandPosition = rightHand.transform.position;
     }
 
     public void DisableVibration() 
@@ -78,7 +62,7 @@ public class HandManager : MonoBehaviour
     public void EnableGain() 
     {
         gainEnabled = true;
-        StartingHandPosition = rightHand.transform.position;
+        StartingHandPosition = realHand.transform.position;
     }
 
     public void DisableGain() 
@@ -102,7 +86,7 @@ public class HandManager : MonoBehaviour
         }
         else
         {
-            CurrentHandPosition = rightHand.transform.position;
+            CurrentHandPosition = realHand.transform.position;
         }
     }
     private void PinchUpdate() 
@@ -112,7 +96,7 @@ public class HandManager : MonoBehaviour
             return;
         }
 
-        if (rightHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.5f)
+        if (virtualHand.GetFingerPinchStrength(OVRHand.HandFinger.Index) > 0.5f)
         {
             //Debug.Log("Right Hand is pinching!");
             pinchFlag.EnableFlag();
@@ -125,39 +109,26 @@ public class HandManager : MonoBehaviour
     private void GainUpdate() 
     {
         // Checking if there is a gain to apply
-        float currentGain = experimentalConfig.GetCurrentGain();
+        float gain = experimentalConfig.GetCurrentGain();
 
-        if(currentGain == 1 || !gainEnabled) 
+        if(gain == 1 || !gainEnabled) 
         {
             return;
         }
 
-        Vector3 currentHandPos = rightHandPos.position;
+        Debug.Log("The gain is: " + gain);
+        virtualHand.transform.position = GainWarp(realHand.position, StartingHandPosition, gain);
 
-        /*if(Vector3.Distance(StartingHandPosition, currentHandPos) < distanceThreshold) 
-        {
-            return; // don't apply any gain until the hand leaves the starting area
-        }*/
+        
+    }
 
-        Debug.Log("Current gain: " + currentGain);
-        // Get the movement delta
-        //Vector3 delta = movementDelta.CalculateAverageMovementDelta();
+    private Vector3 GainWarp(Vector3 pr, Vector3 o, float g)
+    {
+        Vector3 dr = pr - o; // Unwarped offset from origin
+        Vector3 dv = g * dr; // Warped offset from origin
+        Vector3 pv = o + dv; // Final warped position
 
-        Vector3 delta = currentHandPos - previousHandPosition;
-
-        // Add the gain
-        Vector3 deltaGain = delta * currentGain;
-
-        // Store the accumulated offset
-        //BaseOffset += deltaGain;
-
-        // Apply the adjusted delta to the hand position
-        // gain too small
-        // ovr hand transform maybe wrong instead use the gameobject transform
-        rightHandVirtual.position += deltaGain;
-
-        //movementDelta.AddValue(currentHandPos);
-        previousHandPosition = currentHandPos;
+        return pv;
     }
 
 

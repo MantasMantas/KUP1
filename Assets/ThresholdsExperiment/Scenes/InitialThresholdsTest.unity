@@ -2127,7 +2127,6 @@ GameObject:
   - component: {fileID: 1187798131}
   - component: {fileID: 1187798133}
   - component: {fileID: 1187798134}
-  - component: {fileID: 1187798135}
   - component: {fileID: 1187798136}
   m_Layer: 0
   m_Name: HandManager
@@ -2163,15 +2162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851d7ec99173a53459ef355212f5cc98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandPos: {fileID: 1857030528}
-  rightHandVirtual: {fileID: 906872083}
-  rightHand: {fileID: 906872084}
+  realHand: {fileID: 1857030528}
+  virtualHand: {fileID: 906872084}
   distanceThreshold: 0.007
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
   HandMovementEvent: {fileID: 11400000, guid: b216936906ec9024dbe53e8995e68dbc, type: 2}
   pinchFlag: {fileID: 11400000, guid: 0dd9cbb7adb6af843a21227e2bae5584, type: 2}
   path: {fileID: 11400000, guid: baeac6b7a1e18e14381b9472d5741cc0, type: 2}
-  gainStep: 0.01
 --- !u!114 &1187798131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,34 +2296,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1187798130}
         m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
         m_MethodName: DisablePinchDetect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1187798135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187798128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a636b3ecd734843afae120a5bdb8f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voidEvent: {fileID: 11400000, guid: 0cc417f009dd6c244829ad13f8b67254, type: 2}
-  OnEventRaised:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1187798130}
-        m_TargetAssemblyTypeName: HandManager, Assembly-CSharp
-        m_MethodName: SetUpBuffer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
