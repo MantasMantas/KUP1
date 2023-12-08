@@ -8,15 +8,6 @@ public class LogManager : MonoBehaviour
     public LogFile logFile;
     public TExperimentConfiguration experimentalConfig;
     public FloatVariable exposureTime;
-
-    // trial number
-    // target location
-    // gain
-    // If with vibration
-    // LorR vibration
-    // exposure time
-    // 2afc
-    // embodiment
    
 
     // Start is called before the first frame update
@@ -24,6 +15,7 @@ public class LogManager : MonoBehaviour
     {
         header = "trial number, target position, gain, vibration, exposure time, 2afc, embodiment";
         logFile.StartTheLog(header);
+
     }
 
     public void LogData() 
