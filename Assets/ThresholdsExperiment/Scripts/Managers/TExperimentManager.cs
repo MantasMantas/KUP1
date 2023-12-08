@@ -44,5 +44,17 @@ public class TExperimentManager : MonoBehaviour
         // trialIndex variable used to record the trial data as the beggining of data stream
     }
 
+    [SerializeField]
+    public void Set2AFC(string value) 
+    {
+        experimentConfig.SetTwoAfc(value);
+    }
+
+    [SerializeField]
+    public void SetEmbodiment(string value) 
+    {
+        experimentConfig.SetEmbodiment(value);  
+    }
+
     
 }

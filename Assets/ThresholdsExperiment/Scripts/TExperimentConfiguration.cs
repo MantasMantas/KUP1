@@ -24,7 +24,11 @@ public class TExperimentConfiguration : ScriptableObject
     public float[] Gains;
 
     private Trial[] trials;
-    private int trialIndex;
+
+    [HideInInspector]
+    public int trialIndex;
+
+    private string twoAFC, embodiment;
     
     private void OnValidate()
     {
@@ -34,28 +38,6 @@ public class TExperimentConfiguration : ScriptableObject
 
     private void MakeGainsArray()
     {
-        /*int arraySize = (int)((((maxGain - 1) / stepGain) + 1) * 2);
-        Gains = new float[arraySize];
-
-        int midllePoint = arraySize / 2;
-
-        for (int i = 0; i < arraySize; i++)
-        {
-            if (i < midllePoint)
-            {
-                Gains[i] = (maxGain - (i * stepGain)) * -1;
-            }
-            if(i == midllePoint) 
-            {
-                Gains[i] = 1;
-            }
-            if (i > midllePoint)
-            {
-                Gains[i] = (1 + ((i - midllePoint) * stepGain));
-            }
-
-        }*/
-
         float maxValue = maxGain;
         float minValue = 2 - maxGain;
 
@@ -162,6 +144,27 @@ public class TExperimentConfiguration : ScriptableObject
     {
         return GValuesUtil.GetGValue(gvalue);
     }
+
+    public void SetTwoAfc(string value) 
+    {
+        twoAFC = value;
+    }
+
+    public string GetTwoAfc() 
+    {
+        return twoAFC;
+    }
+
+    public void SetEmbodiment(string value) 
+    {
+        embodiment = value;
+    }
+
+    public string GetEmbodiment() 
+    {
+        return embodiment;
+    }
+
 }
 
 
