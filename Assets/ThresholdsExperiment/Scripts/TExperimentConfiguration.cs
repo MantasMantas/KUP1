@@ -21,7 +21,7 @@ public class TExperimentConfiguration : ScriptableObject
     public Gvalues gvalue;
 
     // gain stuff
-    public float[] Gains;
+    private float[] Gains;
 
     private Trial[] trials;
 
@@ -29,6 +29,8 @@ public class TExperimentConfiguration : ScriptableObject
     public int trialIndex;
 
     private string twoAFC, embodiment;
+
+    public bool RealHand, Pacer;
     
     private void OnValidate()
     {

@@ -7,6 +7,7 @@ public class TExperimentManager : MonoBehaviour
     public TExperimentConfiguration experimentConfig;
     public FloatEvent TimerStart;
     public VoidEvent StartAreaPlacementProcedure;
+    public BoolEvent RealHandVis, PacerVis;
     
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,9 @@ public class TExperimentManager : MonoBehaviour
         experimentConfig.RandomizedTrials();
         StartAreaPlacementProcedure.raiseEvent();
         experimentConfig.ResetIndex();
+
+        RealHandVis.raiseEvent(experimentConfig.RealHand);
+        PacerVis.raiseEvent(experimentConfig.Pacer);
     }
 
     // Update is called once per frame

@@ -15,21 +15,14 @@ MonoBehaviour:
   pathShapes: 1
   NumberOfRepetions: 2
   startTouchingDuration: 0.5
-  targetTouchDuration: 0.2
+  targetTouchDuration: 0.5
   restDuration: 6
   targetCenterLeft: 0.2
   targetCenterRight: 0.8
-  targetDisplacementMagnitude: 0
+  targetDisplacementMagnitude: 0.05
   maxGain: 1.4
   stepSize: 0.1
   gvalue: 11
-  Gains:
-  - 0.6
-  - 0.70000005
-  - 0.8
-  - 0.90000004
-  - 1
-  - 1.1
-  - 1.2
-  - 1.3000001
-  - 1.4000001
+  trialIndex: 5
+  RealHand: 1
+  Pacer: 1
