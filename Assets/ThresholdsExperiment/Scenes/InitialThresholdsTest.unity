@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 11400000, guid: baeac6b7a1e18e14381b9472d5741cc0, type: 2}
   experimentalConfig: {fileID: 11400000, guid: 5581d356e9f5b424ab66a090c6276e24, type: 2}
-  speed: 0.001
+  speed: 0.003
 --- !u!23 &598809779
 MeshRenderer:
   m_ObjectHideFlags: 0

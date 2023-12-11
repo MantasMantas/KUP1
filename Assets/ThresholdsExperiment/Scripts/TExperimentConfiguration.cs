@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -23,14 +24,14 @@ public class TExperimentConfiguration : ScriptableObject
     // gain stuff
     private float[] Gains;
 
-    private Trial[] trials;
+    private Trial[] trials, practiceTrials;
 
     [HideInInspector]
     public int trialIndex;
 
     private string twoAFC, embodiment;
 
-    public bool RealHand, Pacer;
+    public bool RealHand, PracticeTrials;
     
     private void OnValidate()
     {
@@ -79,6 +80,23 @@ public class TExperimentConfiguration : ScriptableObject
                 }
             }
         }
+
+        if (PracticeTrials) 
+        {
+            practiceTrials = new Trial[8];
+
+            practiceTrials[0] = new Trial(true, 0.2f, 1.5f);
+            practiceTrials[1] = new Trial(false, 0.2f, 1.5f);
+            practiceTrials[2] = new Trial(true, 0.2f, 0.5f);
+            practiceTrials[3] = new Trial(false, 0.2f, 0.5f);
+            practiceTrials[4] = new Trial(true, 0.8f, 1.5f);
+            practiceTrials[5] = new Trial(false, 0.8f, 1.5f);
+            practiceTrials[6] = new Trial(true, 0.8f, 0.5f);
+            practiceTrials[7] = new Trial(false, 0.8f, 0.5f);
+
+            //trials = trials.Concat(practiceTrials).ToArray();
+            //trials = practiceTrials.Concat(trials).ToArray();
+        }
     }
 
     private void RandomizeTrialsArray()
@@ -93,18 +111,9 @@ public class TExperimentConfiguration : ScriptableObject
             Debug.Log(trials[i].GetVib() + " " + trials[i].GetDir() + " " + trials[i].GetG() + " vibration setting: " + trials[i].GetVibrationSetting());
         }
     }
-    public int IncreamentIndex() 
-    {
-        if(trialIndex > trials.Length) 
-        {
-            return 0;
-        }
-
-        return ++trialIndex;
-    }
     public void ResetIndex() 
     {
-        trialIndex = 1;
+        trialIndex = 0;
     }
     public Trial GetCurrentConfig()
     {
@@ -131,17 +140,6 @@ public class TExperimentConfiguration : ScriptableObject
         PrintTrialsArray();
     }
 
-    public void IncrementTrialIndex() 
-    {
-        if(trials.Length >= trialIndex) 
-        {
-            Debug.Log("All trials have been run!");
-            // send some event to notify the system to stop the experimental block
-            return;
-        }
-        
-        trialIndex++;
-    }
     public float GetGvalue() 
     {
         return GValuesUtil.GetGValue(gvalue);

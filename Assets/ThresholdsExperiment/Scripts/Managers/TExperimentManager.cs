@@ -17,7 +17,7 @@ public class TExperimentManager : MonoBehaviour
         experimentConfig.ResetIndex();
 
         RealHandVis.raiseEvent(experimentConfig.RealHand);
-        PacerVis.raiseEvent(experimentConfig.Pacer);
+        // PacerVis.raiseEvent(experimentConfig.Pacer);
     }
 
     // Update is called once per frame
@@ -38,14 +38,13 @@ public class TExperimentManager : MonoBehaviour
 
     public void IncreamentTrialIndex() 
     {
-        int trialIndex = experimentConfig.IncreamentIndex();
+        experimentConfig.trialIndex++;
 
-        if(trialIndex == 0) 
+        if(experimentConfig.trialIndex >= 8) 
         {
-            //logic probably event to indicate the end of the block
+
         }
 
-        // trialIndex variable used to record the trial data as the beggining of data stream
     }
 
     [SerializeField]
