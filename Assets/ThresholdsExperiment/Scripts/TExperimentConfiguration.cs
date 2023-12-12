@@ -22,7 +22,7 @@ public class TExperimentConfiguration : ScriptableObject
     public Gvalues gvalue;
 
     // gain stuff
-    private float[] Gains;
+    public float[] Gains;
 
     private Trial[] trials, practiceTrials;
 
@@ -32,6 +32,8 @@ public class TExperimentConfiguration : ScriptableObject
     private string twoAFC, embodiment;
 
     public bool RealHand, PracticeTrials;
+
+    public VoidEvent practiceOver, trialsEnd;
     
     private void OnValidate()
     {
@@ -93,15 +95,17 @@ public class TExperimentConfiguration : ScriptableObject
             practiceTrials[5] = new Trial(false, 0.8f, 1.5f);
             practiceTrials[6] = new Trial(true, 0.8f, 0.5f);
             practiceTrials[7] = new Trial(false, 0.8f, 0.5f);
-
-            //trials = trials.Concat(practiceTrials).ToArray();
-            //trials = practiceTrials.Concat(trials).ToArray();
         }
     }
 
     private void RandomizeTrialsArray()
     {
         Randomizer.ShuffleTrials(trials);
+
+        if (PracticeTrials) 
+        {
+            trials = practiceTrials.Concat(trials).ToArray();
+        }
     }
 
     private void PrintTrialsArray() 
@@ -165,6 +169,20 @@ public class TExperimentConfiguration : ScriptableObject
         return embodiment;
     }
 
+    public void IncrementTrialIndex() 
+    {
+        trialIndex++;
+
+        if(trialIndex == 8) 
+        {
+            practiceOver.raiseEvent();
+        }
+
+        if(trialIndex > trials.Length) 
+        {
+            trialsEnd.raiseEvent();
+        }
+    }
 }
 
 

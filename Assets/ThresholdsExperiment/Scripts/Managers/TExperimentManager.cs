@@ -38,13 +38,7 @@ public class TExperimentManager : MonoBehaviour
 
     public void IncreamentTrialIndex() 
     {
-        experimentConfig.trialIndex++;
-
-        if(experimentConfig.trialIndex >= 8) 
-        {
-
-        }
-
+        experimentConfig.IncrementTrialIndex();
     }
 
     [SerializeField]
