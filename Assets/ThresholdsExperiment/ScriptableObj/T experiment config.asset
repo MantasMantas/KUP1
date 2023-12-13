@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ea0762e5d2b5c47a7f53f14473019f, type: 3}
   m_Name: T experiment config
   m_EditorClassIdentifier: 
-  pathShapes: 1
+  pathShapes: 2
   NumberOfRepetions: 1
   startTouchingDuration: 0.5
   targetTouchDuration: 0.4
@@ -27,7 +27,7 @@ MonoBehaviour:
   - 0.6
   - 1
   - 1.4000001
-  trialIndex: 20
+  trialIndex: 2
   RealHand: 1
   PracticeTrials: 1
   practiceOver: {fileID: 11400000, guid: 60181b5dfcb5bd34b9c1335e02e4eca8, type: 2}
