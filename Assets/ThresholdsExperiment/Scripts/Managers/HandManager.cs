@@ -109,9 +109,15 @@ public class HandManager : MonoBehaviour
     private void GainUpdate() 
     {
         // Checking if there is a gain to apply
+
+        if(!gainEnabled) 
+        {
+            return;
+        }
+
         float gain = experimentalConfig.GetCurrentGain();
 
-        if(gain == 1 || !gainEnabled) 
+        if(gain == 1) 
         {
             return;
         }

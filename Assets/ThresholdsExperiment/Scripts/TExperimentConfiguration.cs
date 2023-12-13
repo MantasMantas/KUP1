@@ -178,10 +178,12 @@ public class TExperimentConfiguration : ScriptableObject
             practiceOver.raiseEvent();
         }
 
-        if(trialIndex > trials.Length) 
+        if(trialIndex >= trials.Length) 
         {
             trialsEnd.raiseEvent();
         }
+
+        Debug.Log("Trial index: " + trialIndex + "array length: " + trials.Length);
     }
 }
 
