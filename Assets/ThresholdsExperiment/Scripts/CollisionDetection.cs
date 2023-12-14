@@ -46,9 +46,9 @@ public class CollisionDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject parentObject = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
-  
-        if(parentObject.tag != "RightHand") { return; }
+        //GameObject parentObject = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
+        
+        if(other.tag != "RightHand") { return; }
         if (!counting) 
         {
             counting = true;

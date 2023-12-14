@@ -14,9 +14,9 @@ public class PinchDetection : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        GameObject parentObject = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
+        //GameObject parentObject = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
 
-        if (parentObject.tag == "RightHand") 
+        if (other.tag == "RightHand") 
         {
             if (pinchFlag.GetFlag())
             {
